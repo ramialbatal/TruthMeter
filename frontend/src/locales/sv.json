@@ -82,7 +82,8 @@
       "neutral": "Urval av Främsta Neutrala Källor (max 10)",
       "noSupporting": "Inga stödjande källor hittades för detta påstående.",
       "noContradicting": "Inga motsägande källor hittades för detta påstående.",
-      "noNeutral": "Inga neutrala källor hittades för detta påstående."
+      "noNeutral": "Inga neutrala källor hittades för detta påstående.",
+      "count": "källor"
     },
     "analyzedAt": "Analyserad: {{date}}"
   },

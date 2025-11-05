@@ -82,7 +82,8 @@
       "neutral": "En İyi Tarafsız Kaynaklar Seçimi (maks 10)",
       "noSupporting": "Bu iddia için destekleyici kaynak bulunamadı.",
       "noContradicting": "Bu iddia için karşıt kaynak bulunamadı.",
-      "noNeutral": "Bu iddia için tarafsız kaynak bulunamadı."
+      "noNeutral": "Bu iddia için tarafsız kaynak bulunamadı.",
+      "count": "kaynaklar"
     },
     "analyzedAt": "Analiz tarihi: {{date}}"
   },

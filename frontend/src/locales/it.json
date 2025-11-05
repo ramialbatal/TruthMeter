@@ -77,6 +77,7 @@
     },
     "sources": {
       "title": "Fonti",
+      "count": "fonti",
       "supporting": "Selezione delle Principali Fonti di Supporto (max 10)",
       "contradicting": "Selezione delle Principali Fonti Contraddittorie (max 10)",
       "neutral": "Selezione delle Principali Fonti Neutrali (max 10)",

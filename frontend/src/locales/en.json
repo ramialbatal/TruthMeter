@@ -66,6 +66,7 @@
     },
     "sources": {
       "title": "Sources",
+      "count": "sources",
       "supporting": "Supporting Sources (up to 10)",
       "contradicting": "Contradicting Sources (up to 10)",
       "neutral": "Neutral Sources (up to 10)",

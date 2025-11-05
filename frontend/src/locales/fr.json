@@ -66,6 +66,7 @@
     },
     "sources": {
       "title": "Sources",
+      "count": "sources",
       "supporting": "Sélection des Meilleures Sources Favorables (max 10)",
       "contradicting": "Sélection des Meilleures Sources Contradictoires (max 10)",
       "neutral": "Sélection des Meilleures Sources Neutres (max 10)",
