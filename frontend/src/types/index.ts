@@ -7,6 +7,7 @@ export interface AnalysisResult {
   neutralScore: number;
   summary: string;
   sources: Source[];
+  totalSourcesRetrieved: number;
   analyzedAt: string;
   cached: boolean;
 }
@@ -16,6 +17,7 @@ export interface Source {
   title: string;
   snippet: string;
   relevance: 'supporting' | 'contradicting' | 'neutral';
+  score: number;
 }
 
 export interface AnalysisRequest {

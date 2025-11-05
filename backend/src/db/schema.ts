@@ -26,6 +26,13 @@ export function initializeDatabase(dbPath: string): Database.Database {
     // Column already exists, ignore error
   }
 
+  // Add total_sources_retrieved column to existing tables (migration)
+  try {
+    db.exec(`ALTER TABLE analyses ADD COLUMN total_sources_retrieved INTEGER NOT NULL DEFAULT 10`)
+  } catch (error) {
+    // Column already exists, ignore error
+  }
+
   // Create index for faster lookups
   db.exec(`
     CREATE INDEX IF NOT EXISTS idx_content_text_normalized

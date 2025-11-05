@@ -21,17 +21,6 @@ export default function ResultsDashboard({ result }: ResultsDashboardProps) {
     return 'bg-red-100'
   }
 
-  const getRelevanceColor = (relevance: string) => {
-    switch (relevance) {
-      case 'supporting':
-        return 'bg-green-100 text-green-800'
-      case 'contradicting':
-        return 'bg-red-100 text-red-800'
-      default:
-        return 'bg-gray-100 text-gray-800'
-    }
-  }
-
   const getDomainFromUrl = (url: string): string => {
     try {
       const urlObj = new URL(url)
@@ -108,15 +97,22 @@ export default function ResultsDashboard({ result }: ResultsDashboardProps) {
 
       {/* Sources */}
       <div className="animate-fade-in" style={{ animationDelay: '0.5s' }}>
-        <h3 className="text-lg sm:text-xl font-semibold text-gray-900 dark:text-white mb-4">
-          Sources ({result.sources.length})
+        <h3 className="text-lg sm:text-xl font-semibold text-gray-900 dark:text-white mb-2">
+          Sources
         </h3>
-        <div className="space-y-3 sm:space-y-4">
-          {result.sources.map((source, index) => (
+        <p className="text-xs sm:text-sm text-gray-600 dark:text-gray-400 mb-6">
+          Percentages calculated from {result.totalSourcesRetrieved} sources (showing top sources below)
+        </p>
+
+        {(() => {
+          const supportingSources = result.sources.filter(s => s.relevance === 'supporting')
+          const contradictingSources = result.sources.filter(s => s.relevance === 'contradicting')
+          const neutralSources = result.sources.filter(s => s.relevance === 'neutral')
+
+          const renderSourceCard = (source: typeof result.sources[0], index: number) => (
             <div
               key={index}
-              className="border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-700/50 rounded-xl p-3 sm:p-4 hover:shadow-lg dark:hover:shadow-gray-900/50 transition-all duration-300 transform hover:scale-[1.02] animate-fade-in"
-              style={{ animationDelay: `${0.6 + index * 0.1}s` }}
+              className="border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-700/50 rounded-xl p-3 sm:p-4 hover:shadow-lg dark:hover:shadow-gray-900/50 transition-all duration-300 transform hover:scale-[1.02]"
             >
               <div className="flex items-start gap-2 sm:gap-3">
                 {/* Favicon */}
@@ -125,21 +121,16 @@ export default function ResultsDashboard({ result }: ResultsDashboardProps) {
                   alt={getSourceName(source.url)}
                   className="w-4 h-4 sm:w-5 sm:h-5 mt-0.5 flex-shrink-0"
                   onError={(e) => {
-                    // Fallback to a generic icon if favicon fails to load
                     e.currentTarget.src = 'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%23666"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>'
                   }}
                 />
 
                 <div className="flex-1 min-w-0">
-                  {/* Source name and title */}
                   <div className="flex items-start justify-between gap-2 mb-1">
                     <div className="flex-1 min-w-0">
                       <div className="flex items-center gap-2 mb-1 flex-wrap">
                         <span className="text-xs sm:text-sm font-semibold text-gray-700 dark:text-gray-200">
                           {getSourceName(source.url)}
-                        </span>
-                        <span className={`px-2 py-0.5 text-xs rounded-full whitespace-nowrap ${getRelevanceColor(source.relevance)}`}>
-                          {source.relevance}
                         </span>
                       </div>
                       <a
@@ -153,20 +144,61 @@ export default function ResultsDashboard({ result }: ResultsDashboardProps) {
                     </div>
                   </div>
 
-                  {/* Snippet */}
                   <p className="text-xs sm:text-sm text-gray-600 dark:text-gray-400 mt-2 leading-relaxed">
                     {source.snippet}
                   </p>
 
-                  {/* URL */}
                   <p className="text-xs text-gray-400 dark:text-gray-500 mt-2 truncate">
                     {getDomainFromUrl(source.url)}
                   </p>
                 </div>
               </div>
             </div>
-          ))}
-        </div>
+          )
+
+          return (
+            <div className="space-y-6">
+              {/* Supporting Sources */}
+              {supportingSources.length > 0 && (
+                <div>
+                  <h4 className="text-md sm:text-lg font-semibold text-green-700 dark:text-green-400 mb-3 flex items-center gap-2">
+                    <span className="w-2 h-2 bg-green-600 rounded-full"></span>
+                    Supporting Sources ({supportingSources.length})
+                  </h4>
+                  <div className="space-y-3">
+                    {supportingSources.map((source, index) => renderSourceCard(source, index))}
+                  </div>
+                </div>
+              )}
+
+              {/* Contradicting Sources */}
+              {contradictingSources.length > 0 && (
+                <div>
+                  <h4 className="text-md sm:text-lg font-semibold text-red-700 dark:text-red-400 mb-3 flex items-center gap-2">
+                    <span className="w-2 h-2 bg-red-600 rounded-full"></span>
+                    Contradicting Sources ({contradictingSources.length})
+                  </h4>
+                  <div className="space-y-3">
+                    {contradictingSources.map((source, index) => renderSourceCard(source, index))}
+                  </div>
+                </div>
+              )}
+
+              {/* Neutral Sources */}
+              {neutralSources.length > 0 && (
+                <div>
+                  <h4 className="text-md sm:text-lg font-semibold text-gray-700 dark:text-gray-400 mb-3 flex items-center gap-2">
+                    <span className="w-2 h-2 bg-gray-600 rounded-full"></span>
+                    Neutral Sources ({neutralSources.length})
+                  </h4>
+                  <div className="space-y-3">
+                    {neutralSources.map((source, index) => renderSourceCard(source, index))}
+                  </div>
+                </div>
+              )}
+            </div>
+          )
+        })()}
       </div>
 
       {/* Timestamp */}

@@ -44,6 +44,7 @@ export class FactCheckerService {
       neutralScore: analysis.neutralScore,
       summary: analysis.summary,
       sources: analysis.sources,
+      totalSourcesRetrieved: sources.length,
       analyzedAt: new Date().toISOString(),
       cached: false,
     }
