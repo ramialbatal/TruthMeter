@@ -526,7 +526,7 @@ curl https://your-api.railway.app/health
 curl -X POST https://your-api.railway.app/analyze \
   -H "Content-Type: application/json" \
   -d '{
-    "tweetText": "The Earth orbits around the Sun"
+    "contentText": "The Earth orbits around the Sun"
   }'
 
 # Should return 200 with analysis results

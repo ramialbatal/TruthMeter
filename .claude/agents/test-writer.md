@@ -149,15 +149,15 @@ import app from '../src/index'
 
 describe('POST /api/analyze', () => {
   describe('Happy Path', () => {
-    it('should return analysis for valid tweet', async () => {
+    it('should return analysis for valid content', async () => {
       const response = await request(app)
         .post('/api/analyze')
-        .send({ tweetText: 'The Earth is round' })
+        .send({ contentText: 'The Earth is round' })
         .expect(200)
 
       expect(response.body).toMatchObject({
         id: expect.any(String),
-        tweetText: 'The Earth is round',
+        contentText: 'The Earth is round',
         accuracyScore: expect.any(Number),
         agreementScore: expect.any(Number),
         disagreementScore: expect.any(Number),
@@ -171,29 +171,29 @@ describe('POST /api/analyze', () => {
   })
 
   describe('Validation', () => {
-    it('should return 400 for missing tweetText', async () => {
+    it('should return 400 for missing contentText', async () => {
       const response = await request(app)
         .post('/api/analyze')
         .send({})
         .expect(400)
 
-      expect(response.body.message).toBe('Tweet text is required')
+      expect(response.body.message).toBe('Content text is required')
     })
 
-    it('should return 400 for too short tweet', async () => {
+    it('should return 400 for too short content', async () => {
       const response = await request(app)
         .post('/api/analyze')
-        .send({ tweetText: 'hi' })
+        .send({ contentText: 'hi' })
         .expect(400)
 
       expect(response.body.message).toContain('at least 10 characters')
     })
 
-    it('should return 400 for too long tweet', async () => {
+    it('should return 400 for too long content', async () => {
       const longText = 'a'.repeat(2001)
       const response = await request(app)
         .post('/api/analyze')
-        .send({ tweetText: longText })
+        .send({ contentText: longText })
         .expect(400)
 
       expect(response.body.message).toContain('less than 2000 characters')
@@ -211,7 +211,7 @@ describe('POST /api/analyze', () => {
 
       const response = await request(app)
         .post('/api/analyze')
-        .send({ tweetText: 'Test tweet' })
+        .send({ contentText: 'Test content' })
         .expect(500)
 
       expect(response.body.message).toBeDefined()
@@ -226,9 +226,9 @@ describe('POST /api/analyze', () => {
 import { describe, it, expect, vi } from 'vitest'
 import { render, screen, waitFor } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
-import TweetInput from './TweetInput'
+import ContentInput from './ContentInput'
 
-describe('TweetInput', () => {
+describe('ContentInput', () => {
   const mockOnResult = vi.fn()
 
   beforeEach(() => {
@@ -237,32 +237,32 @@ describe('TweetInput', () => {
 
   describe('Rendering', () => {
     it('should render input form', () => {
-      render(<TweetInput onResult={mockOnResult} />)
+      render(<ContentInput onResult={mockOnResult} />)
 
-      expect(screen.getByLabelText(/paste tweet content/i)).toBeInTheDocument()
-      expect(screen.getByRole('button', { name: /analyze tweet/i })).toBeInTheDocument()
+      expect(screen.getByLabelText(/paste content/i)).toBeInTheDocument()
+      expect(screen.getByRole('button', { name: /analyze content/i })).toBeInTheDocument()
     })
   })
 
   describe('User Interaction', () => {
     it('should allow typing in textarea', async () => {
       const user = userEvent.setup()
-      render(<TweetInput onResult={mockOnResult} />)
+      render(<ContentInput onResult={mockOnResult} />)
 
-      const textarea = screen.getByLabelText(/paste tweet content/i)
-      await user.type(textarea, 'Test tweet text')
+      const textarea = screen.getByLabelText(/paste content/i)
+      await user.type(textarea, 'Test content text')
 
-      expect(textarea).toHaveValue('Test tweet text')
+      expect(textarea).toHaveValue('Test content text')
     })
 
     it('should show loading state when submitting', async () => {
       const user = userEvent.setup()
-      render(<TweetInput onResult={mockOnResult} />)
+      render(<ContentInput onResult={mockOnResult} />)
 
-      const textarea = screen.getByLabelText(/paste tweet content/i)
-      await user.type(textarea, 'Test tweet that is long enough')
+      const textarea = screen.getByLabelText(/paste content/i)
+      await user.type(textarea, 'Test content that is long enough')
 
-      const button = screen.getByRole('button', { name: /analyze tweet/i })
+      const button = screen.getByRole('button', { name: /analyze content/i })
       await user.click(button)
 
       expect(screen.getByText(/analyzing/i)).toBeInTheDocument()
@@ -272,12 +272,12 @@ describe('TweetInput', () => {
   describe('Validation', () => {
     it('should show error for too short input', async () => {
       const user = userEvent.setup()
-      render(<TweetInput onResult={mockOnResult} />)
+      render(<ContentInput onResult={mockOnResult} />)
 
-      const textarea = screen.getByLabelText(/paste tweet content/i)
+      const textarea = screen.getByLabelText(/paste content/i)
       await user.type(textarea, 'short')
 
-      const button = screen.getByRole('button', { name: /analyze tweet/i })
+      const button = screen.getByRole('button', { name: /analyze content/i })
       await user.click(button)
 
       await waitFor(() => {
@@ -301,12 +301,12 @@ describe('TweetInput', () => {
         json: async () => mockResult,
       })
 
-      render(<TweetInput onResult={mockOnResult} />)
+      render(<ContentInput onResult={mockOnResult} />)
 
-      const textarea = screen.getByLabelText(/paste tweet content/i)
-      await user.type(textarea, 'Test tweet text that is long enough')
+      const textarea = screen.getByLabelText(/paste content/i)
+      await user.type(textarea, 'Test content text that is long enough')
 
-      const button = screen.getByRole('button', { name: /analyze tweet/i })
+      const button = screen.getByRole('button', { name: /analyze content/i })
       await user.click(button)
 
       await waitFor(() => {
@@ -323,12 +323,12 @@ describe('TweetInput', () => {
         json: async () => ({ message: 'Server error' }),
       })
 
-      render(<TweetInput onResult={mockOnResult} />)
+      render(<ContentInput onResult={mockOnResult} />)
 
-      const textarea = screen.getByLabelText(/paste tweet content/i)
-      await user.type(textarea, 'Test tweet text that is long enough')
+      const textarea = screen.getByLabelText(/paste content/i)
+      await user.type(textarea, 'Test content text that is long enough')
 
-      const button = screen.getByRole('button', { name: /analyze tweet/i })
+      const button = screen.getByRole('button', { name: /analyze content/i })
       await user.click(button)
 
       await waitFor(() => {
@@ -430,15 +430,15 @@ describe('CacheService', () => {
   })
 
   describe('get', () => {
-    it('should return null for non-existent tweet', () => {
-      const result = cacheService.get('non-existent tweet')
+    it('should return null for non-existent content', () => {
+      const result = cacheService.get('non-existent content')
       expect(result).toBeNull()
     })
 
-    it('should return cached result for existing tweet', () => {
+    it('should return cached result for existing content', () => {
       const mockResult = {
         id: '123',
-        tweetText: 'Test tweet',
+        contentText: 'Test content',
         accuracyScore: 85,
         agreementScore: 70,
         disagreementScore: 30,
@@ -448,7 +448,7 @@ describe('CacheService', () => {
       }
 
       cacheService.set(mockResult)
-      const cached = cacheService.get('Test tweet')
+      const cached = cacheService.get('Test content')
 
       expect(cached).toMatchObject({
         ...mockResult,
@@ -456,10 +456,10 @@ describe('CacheService', () => {
       })
     })
 
-    it('should normalize tweet text for cache lookup', () => {
+    it('should normalize content text for cache lookup', () => {
       const mockResult = {
         id: '123',
-        tweetText: 'Test Tweet',
+        contentText: 'Test Content',
         accuracyScore: 85,
         agreementScore: 70,
         disagreementScore: 30,
@@ -471,9 +471,9 @@ describe('CacheService', () => {
       cacheService.set(mockResult)
 
       // Different casing and spacing should still match
-      const cached1 = cacheService.get('test tweet')
-      const cached2 = cacheService.get('TEST  TWEET')
-      const cached3 = cacheService.get('  test tweet  ')
+      const cached1 = cacheService.get('test content')
+      const cached2 = cacheService.get('TEST  CONTENT')
+      const cached3 = cacheService.get('  test content  ')
 
       expect(cached1).not.toBeNull()
       expect(cached2).not.toBeNull()
@@ -487,13 +487,13 @@ describe('CacheService', () => {
 
       db.prepare(`
         INSERT INTO analyses (
-          id, tweet_text, tweet_text_normalized, accuracy_score,
+          id, content_text, content_text_normalized, accuracy_score,
           agreement_score, disagreement_score, summary, sources, created_at
         ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
       `).run(
         '123',
-        'Old tweet',
-        'old tweet',
+        'Old content',
+        'old content',
         85,
         70,
         30,
@@ -502,7 +502,7 @@ describe('CacheService', () => {
         oldDate.toISOString()
       )
 
-      const cached = cacheService.get('Old tweet')
+      const cached = cacheService.get('Old content')
       expect(cached).toBeNull()
     })
   })
@@ -511,7 +511,7 @@ describe('CacheService', () => {
     it('should store analysis result', () => {
       const mockResult = {
         id: '123',
-        tweetText: 'Test tweet',
+        contentText: 'Test content',
         accuracyScore: 85,
         agreementScore: 70,
         disagreementScore: 30,
@@ -522,7 +522,7 @@ describe('CacheService', () => {
 
       expect(() => cacheService.set(mockResult)).not.toThrow()
 
-      const cached = cacheService.get('Test tweet')
+      const cached = cacheService.get('Test content')
       expect(cached).not.toBeNull()
     })
   })
@@ -732,10 +732,10 @@ afterEach(() => {
 
 ## Common Test Scenarios for TruthMeter
 
-### 1. Test Tweet Analysis Flow
+### 1. Test Content Analysis Flow
 ```typescript
-describe('Tweet Analysis Flow', () => {
-  it('should analyze tweet end-to-end', async () => {
+describe('Content Analysis Flow', () => {
+  it('should analyze content end-to-end', async () => {
     // Mock all external services
     // Test complete flow
     // Verify all steps
@@ -746,7 +746,7 @@ describe('Tweet Analysis Flow', () => {
 ### 2. Test Caching
 ```typescript
 describe('Cache Behavior', () => {
-  it('should use cache for duplicate tweets', async () => {
+  it('should use cache for duplicate content', async () => {
     // First request (cache miss)
     // Second request (cache hit)
     // Verify external APIs not called twice

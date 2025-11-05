@@ -183,17 +183,17 @@ frontend/
 You might be asked to implement:
 
 ### Core Features
-- ✅ Analyze tweet URL
+- ✅ Analyze content text
 - ✅ Display factual score
 - ✅ Show sentiment breakdown
 - ⬜ User authentication
 - ⬜ Save analysis history
 - ⬜ Export results (PDF/CSV)
 - ⬜ Share analysis via link
-- ⬜ Compare multiple tweets
+- ⬜ Compare multiple content items
 
 ### Advanced Features
-- ⬜ Batch analysis (multiple URLs)
+- ⬜ Batch analysis (multiple content items)
 - ⬜ Custom source filtering
 - ⬜ Real-time progress updates (WebSockets)
 - ⬜ Browser extension

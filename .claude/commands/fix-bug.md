@@ -114,7 +114,7 @@ cd backend && npm run dev
 # Test API directly
 curl -X POST http://localhost:3001/api/analyze \
   -H "Content-Type: application/json" \
-  -d '{"tweetText": "test"}'
+  -d '{"contentText": "test"}'
 
 # Check database
 sqlite3 truthmeter.db ".schema"
@@ -257,7 +257,7 @@ Fix all instances to prevent future bugs.
 # Test the fixed endpoint
 curl -X POST http://localhost:3001/api/analyze \
   -H "Content-Type: application/json" \
-  -d '{"tweetText": "test tweet text"}'
+  -d '{"contentText": "test content text"}'
 
 # Verify response is correct
 # Check server logs for errors
@@ -279,10 +279,10 @@ Offer to create tests to prevent regression:
 ```typescript
 // Example unit test
 describe('FactCheckerService', () => {
-  it('should handle empty tweet text', async () => {
+  it('should handle empty content text', async () => {
     await expect(
       factChecker.analyzePost('')
-    ).rejects.toThrow('Tweet text is required')
+    ).rejects.toThrow('Content text is required')
   })
 })
 ```
@@ -459,7 +459,7 @@ lsof -i :5173
 # Network debugging
 curl -v http://localhost:3001/api/analyze \
   -H "Content-Type: application/json" \
-  -d '{"tweetText":"test"}'
+  -d '{"contentText":"test"}'
 ```
 
 ## Prevention Strategies
@@ -469,8 +469,8 @@ After fixing the bug, consider:
 ### 1. Add Validation
 ```typescript
 // Prevent bad input
-if (!tweetText || tweetText.trim().length === 0) {
-  throw new Error('Tweet text is required')
+if (!contentText || contentText.trim().length === 0) {
+  throw new Error('Content text is required')
 }
 ```
 
