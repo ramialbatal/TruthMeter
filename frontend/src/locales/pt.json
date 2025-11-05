@@ -77,9 +77,9 @@
     },
     "sources": {
       "title": "Fontes",
-      "supporting": "Seleção das Principais Fontes de Apoio (máx 3)",
-      "contradicting": "Seleção das Principais Fontes Contraditórias (máx 3)",
-      "neutral": "Seleção das Principais Fontes Neutras (máx 3)",
+      "supporting": "Seleção das Principais Fontes de Apoio (máx 10)",
+      "contradicting": "Seleção das Principais Fontes Contraditórias (máx 10)",
+      "neutral": "Seleção das Principais Fontes Neutras (máx 10)",
       "noSupporting": "Nenhuma fonte de apoio encontrada para esta afirmação.",
       "noContradicting": "Nenhuma fonte contraditória encontrada para esta afirmação.",
       "noNeutral": "Nenhuma fonte neutra encontrada para esta afirmação."

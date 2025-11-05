@@ -77,9 +77,9 @@
     },
     "sources": {
       "title": "Källor",
-      "supporting": "Urval av Främsta Stödjande Källor (max 3)",
-      "contradicting": "Urval av Främsta Motsägande Källor (max 3)",
-      "neutral": "Urval av Främsta Neutrala Källor (max 3)",
+      "supporting": "Urval av Främsta Stödjande Källor (max 10)",
+      "contradicting": "Urval av Främsta Motsägande Källor (max 10)",
+      "neutral": "Urval av Främsta Neutrala Källor (max 10)",
       "noSupporting": "Inga stödjande källor hittades för detta påstående.",
       "noContradicting": "Inga motsägande källor hittades för detta påstående.",
       "noNeutral": "Inga neutrala källor hittades för detta påstående."
