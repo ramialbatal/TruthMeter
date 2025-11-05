@@ -51,7 +51,7 @@ export default function PieChart({
         <div className="bg-white dark:bg-gray-800 p-3 rounded-lg shadow-lg border border-gray-200 dark:border-gray-700 z-50 relative">
           <p className="font-semibold text-gray-900 dark:text-white">{data.name}</p>
           <p className="text-sm text-gray-600 dark:text-gray-400">
-            {data.value.toFixed(1)}% ({data.count} sources)
+            {data.value.toFixed(1)}% ({data.count} {t('results.sources.title').toLowerCase()})
           </p>
         </div>
       )
