@@ -6,6 +6,9 @@ interface ResultsDashboardProps {
 }
 
 export default function ResultsDashboard({ result }: ResultsDashboardProps) {
+  // Calculate neutral score
+  const neutralScore = 100 - result.agreementScore - result.disagreementScore
+
   const getScoreColor = (score: number) => {
     if (score >= 70) return 'text-green-600'
     if (score >= 40) return 'text-yellow-600'
@@ -67,7 +70,7 @@ export default function ResultsDashboard({ result }: ResultsDashboardProps) {
       </div>
 
       {/* Score Cards */}
-      <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4 mb-6 sm:mb-8">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 mb-6 sm:mb-8">
         <div className={`${getScoreBgColor(result.accuracyScore)} dark:bg-opacity-20 rounded-xl p-4 sm:p-6 transform hover:scale-105 transition-all duration-300 animate-fade-in`}>
           <p className="text-xs sm:text-sm font-medium text-gray-600 dark:text-gray-400 mb-2">Factual Accuracy</p>
           <p className={`text-3xl sm:text-4xl font-bold ${getScoreColor(result.accuracyScore)}`}>
@@ -87,10 +90,16 @@ export default function ResultsDashboard({ result }: ResultsDashboardProps) {
           <p className="text-3xl sm:text-4xl font-bold text-orange-600 dark:text-orange-400">{result.disagreementScore}%</p>
           <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">sources disagree</p>
         </div>
+
+        <div className="bg-gray-50 dark:bg-gray-900/20 rounded-xl p-4 sm:p-6 transform hover:scale-105 transition-all duration-300 animate-fade-in" style={{ animationDelay: '0.3s' }}>
+          <p className="text-xs sm:text-sm font-medium text-gray-600 dark:text-gray-400 mb-2">Neutral</p>
+          <p className="text-3xl sm:text-4xl font-bold text-gray-600 dark:text-gray-400">{neutralScore}%</p>
+          <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">sources neutral</p>
+        </div>
       </div>
 
       {/* Summary */}
-      <div className="mb-6 sm:mb-8 animate-fade-in" style={{ animationDelay: '0.3s' }}>
+      <div className="mb-6 sm:mb-8 animate-fade-in" style={{ animationDelay: '0.4s' }}>
         <h3 className="text-lg sm:text-xl font-semibold text-gray-900 dark:text-white mb-3">Summary</h3>
         <p className="text-sm sm:text-base text-gray-700 dark:text-gray-300 leading-relaxed bg-gray-50 dark:bg-gray-700/50 p-4 rounded-lg">
           {result.summary}
@@ -98,7 +107,7 @@ export default function ResultsDashboard({ result }: ResultsDashboardProps) {
       </div>
 
       {/* Sources */}
-      <div className="animate-fade-in" style={{ animationDelay: '0.4s' }}>
+      <div className="animate-fade-in" style={{ animationDelay: '0.5s' }}>
         <h3 className="text-lg sm:text-xl font-semibold text-gray-900 dark:text-white mb-4">
           Sources ({result.sources.length})
         </h3>
@@ -107,7 +116,7 @@ export default function ResultsDashboard({ result }: ResultsDashboardProps) {
             <div
               key={index}
               className="border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-700/50 rounded-xl p-3 sm:p-4 hover:shadow-lg dark:hover:shadow-gray-900/50 transition-all duration-300 transform hover:scale-[1.02] animate-fade-in"
-              style={{ animationDelay: `${0.5 + index * 0.1}s` }}
+              style={{ animationDelay: `${0.6 + index * 0.1}s` }}
             >
               <div className="flex items-start gap-2 sm:gap-3">
                 {/* Favicon */}
@@ -161,7 +170,7 @@ export default function ResultsDashboard({ result }: ResultsDashboardProps) {
       </div>
 
       {/* Timestamp */}
-      <div className="mt-6 sm:mt-8 text-xs sm:text-sm text-gray-500 dark:text-gray-400 text-right animate-fade-in" style={{ animationDelay: '0.6s' }}>
+      <div className="mt-6 sm:mt-8 text-xs sm:text-sm text-gray-500 dark:text-gray-400 text-right animate-fade-in" style={{ animationDelay: '0.7s' }}>
         Analyzed at: {new Date(result.analyzedAt).toLocaleString()}
       </div>
     </div>
