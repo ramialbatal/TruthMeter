@@ -11,11 +11,11 @@ export class FactCheckerService {
     private cacheService: CacheService
   ) {}
 
-  async analyzePost(tweetText: string): Promise<AnalysisResult> {
+  async analyzePost(contentText: string): Promise<AnalysisResult> {
     // Check cache first
-    const cached = this.cacheService.get(tweetText)
+    const cached = this.cacheService.get(contentText)
     if (cached) {
-      console.log('Cache hit for tweet:', tweetText.substring(0, 50))
+      console.log('Cache hit for content:', contentText.substring(0, 50))
       return cached
     }
 
@@ -23,21 +23,21 @@ export class FactCheckerService {
 
     // Search for sources
     console.log('Searching sources with Tavily...')
-    const sources = await this.tavilyService.search(tweetText, 10)
+    const sources = await this.tavilyService.search(contentText, 10)
 
     if (sources.length === 0) {
-      throw new Error('No sources found for this tweet. Please try a different query.')
+      throw new Error('No sources found for this content. Please try a different query.')
     }
 
     console.log(`Found ${sources.length} sources, analyzing with OpenAI...`)
 
     // Analyze with OpenAI
-    const analysis = await this.openaiService.analyzeFactCheck(tweetText, sources)
+    const analysis = await this.openaiService.analyzeFactCheck(contentText, sources)
 
     // Create result
     const result: AnalysisResult = {
       id: uuidv4(),
-      tweetText,
+      contentText,
       accuracyScore: analysis.accuracyScore,
       agreementScore: analysis.agreementScore,
       disagreementScore: analysis.disagreementScore,

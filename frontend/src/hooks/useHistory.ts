@@ -6,10 +6,10 @@ const MAX_HISTORY_ITEMS = 20
 
 export interface HistoryItem {
   id: string
-  tweetText: string
+  contentText: string
   accuracyScore: number
   analyzedAt: string
-  preview: string // First 100 chars of tweet
+  preview: string // First 100 chars of content
 }
 
 export function useHistory() {
@@ -31,16 +31,16 @@ export function useHistory() {
   const addToHistory = (result: AnalysisResult) => {
     const historyItem: HistoryItem = {
       id: result.id,
-      tweetText: result.tweetText,
+      contentText: result.contentText,
       accuracyScore: result.accuracyScore,
       analyzedAt: result.analyzedAt,
-      preview: result.tweetText.substring(0, 100) + (result.tweetText.length > 100 ? '...' : ''),
+      preview: result.contentText.substring(0, 100) + (result.contentText.length > 100 ? '...' : ''),
     }
 
     setHistory((prev) => {
-      // Remove duplicates (same tweet text)
+      // Remove duplicates (same content text)
       const filtered = prev.filter(
-        (item) => item.tweetText.toLowerCase() !== result.tweetText.toLowerCase()
+        (item) => item.contentText.toLowerCase() !== result.contentText.toLowerCase()
       )
 
       // Add new item at the beginning

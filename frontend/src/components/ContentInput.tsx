@@ -3,15 +3,15 @@ import { useForm } from 'react-hook-form'
 import { analyzePost } from '../api/client'
 import { AnalysisResult } from '../types'
 
-interface TweetInputProps {
+interface ContentInputProps {
   onResult: (result: AnalysisResult) => void
 }
 
 interface FormData {
-  tweetText: string
+  contentText: string
 }
 
-export default function TweetInput({ onResult }: TweetInputProps) {
+export default function ContentInput({ onResult }: ContentInputProps) {
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
 
@@ -22,7 +22,7 @@ export default function TweetInput({ onResult }: TweetInputProps) {
     setError(null)
 
     try {
-      const result = await analyzePost(data.tweetText)
+      const result = await analyzePost(data.contentText)
       onResult(result)
     } catch (err) {
       setError(err instanceof Error ? err.message : 'An error occurred')
@@ -35,21 +35,21 @@ export default function TweetInput({ onResult }: TweetInputProps) {
     <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg hover:shadow-xl dark:shadow-gray-900/50 p-4 sm:p-6 lg:p-8 transition-all duration-300">
       <form onSubmit={handleSubmit(onSubmit)}>
         <label
-          htmlFor="tweetText"
+          htmlFor="contentText"
           className="block text-sm sm:text-base font-medium text-gray-700 dark:text-gray-200 mb-2"
         >
-          Paste Tweet Content
+          Paste Content to Fact-Check
         </label>
         <textarea
-          id="tweetText"
-          {...register('tweetText', {
-            required: 'Tweet text is required',
-            minLength: { value: 10, message: 'Tweet must be at least 10 characters' },
-            maxLength: { value: 2000, message: 'Tweet must be less than 2000 characters' }
+          id="contentText"
+          {...register('contentText', {
+            required: 'Content text is required',
+            minLength: { value: 10, message: 'Content must be at least 10 characters' },
+            maxLength: { value: 2000, message: 'Content must be less than 2000 characters' }
           })}
           className="w-full px-3 sm:px-4 py-2 sm:py-3 border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400 focus:border-transparent transition-all duration-200 resize-none"
           rows={6}
-          placeholder="Paste the tweet text you want to fact-check..."
+          placeholder="Paste the text content you want to fact-check..."
           disabled={loading}
         />
         {errors.contentText && (

@@ -5,7 +5,7 @@ interface HistorySidebarProps {
   history: HistoryItem[]
   isOpen: boolean
   onClose: () => void
-  onSelect: (tweetText: string) => void
+  onSelect: (contentText: string) => void
   onClear: () => void
   onRemove: (id: string) => void
 }
@@ -100,7 +100,7 @@ export default function HistorySidebar({
               </svg>
               <p className="text-gray-500 dark:text-gray-400">No history yet</p>
               <p className="text-sm text-gray-400 dark:text-gray-500 mt-2">
-                Analyzed tweets will appear here
+                Analyzed content will appear here
               </p>
             </div>
           ) : (
@@ -111,7 +111,7 @@ export default function HistorySidebar({
                   className="group border border-gray-200 dark:border-gray-700 rounded-lg p-3 hover:shadow-md dark:hover:shadow-gray-900/50 transition-all duration-200 cursor-pointer animate-fade-in"
                   style={{ animationDelay: `${index * 0.05}s` }}
                   onClick={() => {
-                    onSelect(item.tweetText)
+                    onSelect(item.contentText)
                     onClose()
                   }}
                 >

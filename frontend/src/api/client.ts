@@ -2,13 +2,13 @@ import { AnalysisResult, AnalysisRequest } from '../types'
 
 const API_URL = import.meta.env.VITE_API_URL || '/api'
 
-export async function analyzePost(tweetText: string): Promise<AnalysisResult> {
+export async function analyzePost(contentText: string): Promise<AnalysisResult> {
   const response = await fetch(`${API_URL}/analyze`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
     },
-    body: JSON.stringify({ tweetText } as AnalysisRequest),
+    body: JSON.stringify({ contentText } as AnalysisRequest),
   })
 
   if (!response.ok) {

@@ -1,7 +1,7 @@
-# TruthMeter - Twitter Post Fact Checker
+# TruthMeter - Content Fact Checker
 
 ## Project Overview
-TruthMeter is a web application that fact-checks Twitter/X posts by analyzing their content against credible web sources. Users paste tweet text, and the system provides a factual accuracy score along with supporting evidence from multiple sources.
+TruthMeter is a web application that fact-checks text content by analyzing their content against credible web sources. Users paste content text, and the system provides a factual accuracy score along with supporting evidence from multiple sources.
 
 ## Tech Stack
 
@@ -29,7 +29,7 @@ truthmeter/
 ├── frontend/                 # React frontend application
 │   ├── src/
 │   │   ├── components/      # React components
-│   │   │   ├── TweetInput.tsx
+│   │   │   ├── ContentInput.tsx
 │   │   │   ├── ResultsDashboard.tsx
 │   │   │   └── LoadingSpinner.tsx
 │   │   ├── api/            # API client
@@ -68,17 +68,17 @@ truthmeter/
 
 ## Core Features
 
-### 1. Tweet Analysis Input
-- Simple textarea for users to paste tweet content
+### 1. Content Analysis Input
+- Simple textarea for users to paste content content
 - Submit button triggers analysis
 - Loading state during processing
 
 ### 2. Fact-Checking Pipeline
-1. User submits tweet text
+1. User submits content text
 2. Backend receives request, checks cache
 3. If not cached:
    - Tavily Search API finds relevant sources
-   - Claude API analyzes tweet against sources
+   - Claude API analyzes content against sources
    - Results stored in SQLite cache
 4. Return analysis results
 
@@ -96,7 +96,7 @@ Display:
 ```typescript
 interface AnalysisResult {
   id: string;
-  tweetText: string;
+  contentText: string;
   accuracyScore: number;        // 0-100
   agreementScore: number;        // 0-100
   disagreementScore: number;     // 0-100
@@ -118,7 +118,7 @@ interface Source {
 ```sql
 CREATE TABLE analyses (
   id TEXT PRIMARY KEY,
-  tweet_text TEXT NOT NULL,
+  content_text TEXT NOT NULL,
   accuracy_score INTEGER NOT NULL,
   agreement_score INTEGER NOT NULL,
   disagreement_score INTEGER NOT NULL,
@@ -127,18 +127,18 @@ CREATE TABLE analyses (
   created_at DATETIME DEFAULT CURRENT_TIMESTAMP
 );
 
-CREATE INDEX idx_tweet_text ON analyses(tweet_text);
+CREATE INDEX idx_content_text ON analyses(content_text);
 ```
 
 ## API Endpoints
 
 ### POST /api/analyze
-Analyzes a tweet for factual accuracy.
+Analyzes a content for factual accuracy.
 
 **Request:**
 ```json
 {
-  "tweetText": "string"
+  "contentText": "string"
 }
 ```
 
@@ -146,7 +146,7 @@ Analyzes a tweet for factual accuracy.
 ```json
 {
   "id": "uuid",
-  "tweetText": "string",
+  "contentText": "string",
   "accuracyScore": 0-100,
   "agreementScore": 0-100,
   "disagreementScore": 0-100,
@@ -191,7 +191,7 @@ VITE_API_URL=http://localhost:3001
 ### Phase 2: Frontend Development
 1. Set up Vite + React + TypeScript
 2. Configure Tailwind CSS
-3. Create TweetInput component
+3. Create ContentInput component
 4. Create ResultsDashboard component
 5. Implement API client
 6. Add loading and error states
@@ -207,10 +207,10 @@ VITE_API_URL=http://localhost:3001
 
 ### Fact-Checking Prompt Strategy
 ```
-System: You are a fact-checking assistant. Analyze the provided tweet against credible sources.
+System: You are a fact-checking assistant. Analyze the provided content against credible sources.
 
 User:
-Tweet: [tweet text]
+Content: [content text]
 
 Sources found:
 [source 1 with snippet]
@@ -229,7 +229,7 @@ Return JSON format.
 ## Tavily Search Integration
 
 ### Search Strategy
-- Query: Use tweet text as search query
+- Query: Use content text as search query
 - Number of results: 10-15 sources
 - Use Tavily's default ranking for credibility
 - Extract: URL, title, content snippet
@@ -239,11 +239,11 @@ Return JSON format.
 
 ### When to Cache
 - Cache all completed analyses
-- Use tweet text as cache key (normalized: lowercase, trim whitespace)
+- Use content text as cache key (normalized: lowercase, trim whitespace)
 - Cache TTL: 7 days (configurable)
 
 ### Cache Hit Logic
-1. Normalize incoming tweet text
+1. Normalize incoming content text
 2. Check SQLite for matching analysis
 3. If found and not expired, return cached result
 4. Otherwise, perform new analysis and cache
@@ -257,14 +257,14 @@ Return JSON format.
 
 ### User Input Validation
 - Min length: 10 characters
-- Max length: 2000 characters (tweet limit + margin)
+- Max length: 2000 characters 
 - No empty submissions
 
 ## Future Enhancements
 - User accounts and history
 - Batch analysis
 - Custom source whitelisting
-- Real-time Twitter integration (if API access obtained)
+- Real-time Social media integration (if API access obtained)
 - Browser extension
 - Share results functionality
 - Compare multiple fact-checkers

@@ -8,16 +8,16 @@ export class CacheService {
     this.db = db
   }
 
-  private normalizeTweetText(text: string): string {
+  private normalizeContentText(text: string): string {
     return text.toLowerCase().trim().replace(/\s+/g, ' ')
   }
 
-  get(tweetText: string): AnalysisResult | null {
-    const normalized = this.normalizeTweetText(tweetText)
+  get(contentText: string): AnalysisResult | null {
+    const normalized = this.normalizeContentText(contentText)
 
     const stmt = this.db.prepare(`
       SELECT * FROM analyses
-      WHERE tweet_text_normalized = ?
+      WHERE content_text_normalized = ?
       AND datetime(created_at, '+7 days') > datetime('now')
       ORDER BY created_at DESC
       LIMIT 1
@@ -29,7 +29,7 @@ export class CacheService {
 
     return {
       id: row.id,
-      tweetText: row.tweet_text,
+      contentText: row.content_text,
       accuracyScore: row.accuracy_score,
       agreementScore: row.agreement_score,
       disagreementScore: row.disagreement_score,
@@ -41,18 +41,18 @@ export class CacheService {
   }
 
   set(result: Omit<AnalysisResult, 'cached'>): void {
-    const normalized = this.normalizeTweetText(result.tweetText)
+    const normalized = this.normalizeContentText(result.contentText)
 
     const stmt = this.db.prepare(`
       INSERT INTO analyses (
-        id, tweet_text, tweet_text_normalized, accuracy_score,
+        id, content_text, content_text_normalized, accuracy_score,
         agreement_score, disagreement_score, summary, sources
       ) VALUES (?, ?, ?, ?, ?, ?, ?, ?)
     `)
 
     stmt.run(
       result.id,
-      result.tweetText,
+      result.contentText,
       normalized,
       result.accuracyScore,
       result.agreementScore,
@@ -75,7 +75,7 @@ export class CacheService {
 
     return {
       id: row.id,
-      tweetText: row.tweet_text,
+      contentText: row.content_text,
       accuracyScore: row.accuracy_score,
       agreementScore: row.agreement_score,
       disagreementScore: row.disagreement_score,
