@@ -23,7 +23,7 @@ You are an expert technical writer specializing in developer documentation. Your
 ```markdown
 ## POST /api/analyze
 
-Analyzes a tweet for factual accuracy.
+Analyzes content for factual accuracy.
 
 ### Request
 
@@ -35,7 +35,7 @@ Analyzes a tweet for factual accuracy.
 **Body:**
 ```json
 {
-  "tweetText": "string (required, 10-2000 chars)"
+  "contentText": "string (required, 10-2000 chars)"
 }
 ```
 
@@ -44,7 +44,7 @@ Analyzes a tweet for factual accuracy.
 curl -X POST http://localhost:3001/api/analyze \
   -H "Content-Type: application/json" \
   -d '{
-    "tweetText": "The Earth orbits around the Sun"
+    "contentText": "The Earth orbits around the Sun"
   }'
 ```
 
@@ -54,7 +54,7 @@ curl -X POST http://localhost:3001/api/analyze \
 ```json
 {
   "id": "uuid",
-  "tweetText": "string",
+  "contentText": "string",
   "accuracyScore": 0-100,
   "agreementScore": 0-100,
   "disagreementScore": 0-100,
@@ -75,7 +75,7 @@ curl -X POST http://localhost:3001/api/analyze \
 **Error (400):**
 ```json
 {
-  "message": "Tweet text is required"
+  "message": "Content text is required"
 }
 ```
 
@@ -97,7 +97,7 @@ Currently no rate limiting. Consider implementing for production.
 
 ### Notes
 
-- Results are cached for 7 days based on normalized tweet text
+- Results are cached for 7 days based on normalized content text
 - External APIs (Tavily, Claude) are called only on cache miss
 - Response time: 5-15 seconds (depending on external APIs)
 ```
@@ -107,12 +107,12 @@ Currently no rate limiting. Consider implementing for production.
 **Function Documentation:**
 ```typescript
 /**
- * Analyzes a tweet for factual accuracy by searching credible sources
+ * Analyzes content for factual accuracy by searching credible sources
  * and using AI to evaluate claims.
  *
- * @param tweetText - The tweet content to fact-check (10-2000 chars)
+ * @param contentText - The content to fact-check (10-2000 chars)
  * @returns Analysis result with accuracy scores and sources
- * @throws {Error} If tweet text is invalid or external APIs fail
+ * @throws {Error} If content text is invalid or external APIs fail
  *
  * @example
  * ```typescript
@@ -129,7 +129,7 @@ Currently no rate limiting. Consider implementing for production.
  *
  * External API calls are made only on cache miss.
  */
-async analyzePost(tweetText: string): Promise<AnalysisResult> {
+async analyzePost(contentText: string): Promise<AnalysisResult> {
   // Implementation
 }
 ```
@@ -137,7 +137,7 @@ async analyzePost(tweetText: string): Promise<AnalysisResult> {
 **Class Documentation:**
 ```typescript
 /**
- * Service for fact-checking tweet content against credible web sources.
+ * Service for fact-checking content against credible web sources.
  *
  * Orchestrates the fact-checking pipeline:
  * - Cache lookup/storage
@@ -162,10 +162,10 @@ export class FactCheckerService {
 **Interface Documentation:**
 ```typescript
 /**
- * Result of a tweet fact-check analysis.
+ * Result of a content fact-check analysis.
  *
  * @property id - Unique identifier for this analysis
- * @property tweetText - The original tweet content analyzed
+ * @property contentText - The original content analyzed
  * @property accuracyScore - Overall factual accuracy (0-100, higher = more accurate)
  * @property agreementScore - Percentage of sources supporting the claim (0-100)
  * @property disagreementScore - Percentage of sources contradicting the claim (0-100)
@@ -176,7 +176,7 @@ export class FactCheckerService {
  */
 export interface AnalysisResult {
   id: string
-  tweetText: string
+  contentText: string
   accuracyScore: number
   agreementScore: number
   disagreementScore: number
@@ -190,9 +190,9 @@ export interface AnalysisResult {
 **Complex Logic Documentation:**
 ```typescript
 /**
- * Normalizes tweet text for cache lookup.
+ * Normalizes content text for cache lookup.
  *
- * Normalization ensures that tweets with minor differences
+ * Normalization ensures that content with minor differences
  * (case, whitespace) are treated as the same for caching.
  *
  * Process:
@@ -206,7 +206,7 @@ export interface AnalysisResult {
  * normalize('HELLO WORLD')      // 'hello world'
  * ```
  */
-private normalizeTweetText(text: string): string {
+private normalizeContentText(text: string): string {
   return text.toLowerCase().trim().replace(/\s+/g, ' ')
 }
 ```
@@ -307,11 +307,11 @@ You should see:
 ## Step 5: Try It Out
 
 1. Open http://localhost:5173 in your browser
-2. Paste a tweet text in the input box
-3. Click "Analyze Tweet"
+2. Paste content text in the input box
+3. Click "Analyze Content"
 4. Wait 5-15 seconds for results
 
-**Example tweet to try:**
+**Example content to try:**
 ```
 The Earth is the third planet from the Sun and the only known planet to harbor life.
 ```
@@ -375,7 +375,7 @@ If you're stuck:
 
 ## Overview
 
-TruthMeter is a full-stack application for fact-checking tweets using AI and web search.
+TruthMeter is a full-stack application for fact-checking content using AI and web search.
 
 ## High-Level Architecture
 
@@ -407,15 +407,15 @@ TruthMeter is a full-stack application for fact-checking tweets using AI and web
 
 ## Data Flow
 
-### Tweet Analysis Flow
+### Content Analysis Flow
 
 1. **User Input**
-   - User pastes tweet text in frontend
+   - User pastes content text in frontend
    - Frontend validates (10-2000 chars)
 
 2. **API Request**
    - POST to `/api/analyze`
-   - Request includes tweet text
+   - Request includes content text
 
 3. **Backend Processing**
    ```
@@ -470,7 +470,7 @@ TruthMeter is a full-stack application for fact-checking tweets using AI and web
 - Manages global state (analysis result)
 - Renders header, input, results
 
-**TweetInput.tsx** - Input form
+**ContentInput.tsx** - Input form
 - Handles user input
 - Form validation
 - API calls
@@ -493,7 +493,7 @@ TruthMeter is a full-stack application for fact-checking tweets using AI and web
 - Returns top 10 results
 
 **ClaudeService** - AI analysis
-- Analyzes tweet against sources
+- Analyzes content against sources
 - Returns structured analysis
 
 **CacheService** - Result caching
@@ -506,8 +506,8 @@ TruthMeter is a full-stack application for fact-checking tweets using AI and web
 ```sql
 CREATE TABLE analyses (
   id TEXT PRIMARY KEY,
-  tweet_text TEXT NOT NULL,
-  tweet_text_normalized TEXT NOT NULL,
+  content_text TEXT NOT NULL,
+  content_text_normalized TEXT NOT NULL,
   accuracy_score INTEGER NOT NULL,
   agreement_score INTEGER NOT NULL,
   disagreement_score INTEGER NOT NULL,
@@ -516,8 +516,8 @@ CREATE TABLE analyses (
   created_at DATETIME DEFAULT CURRENT_TIMESTAMP
 );
 
-CREATE INDEX idx_tweet_text_normalized
-ON analyses(tweet_text_normalized);
+CREATE INDEX idx_content_text_normalized
+ON analyses(content_text_normalized);
 ```
 
 ## Technology Stack
@@ -630,7 +630,7 @@ AI-powered tweet fact-checker that analyzes claims against credible web sources.
 
 ## Features
 
-- ✅ Analyze tweet accuracy (0-100 score)
+- ✅ Analyze content accuracy (0-100 score)
 - ✅ Search 100+ credible sources
 - ✅ AI-powered claim verification
 - ✅ Source citations with relevance

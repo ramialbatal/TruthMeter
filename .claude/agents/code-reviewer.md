@@ -243,11 +243,11 @@ function Component({ data }) {
 // routes/analyze.ts
 router.post('/analyze', async (req, res) => {
   try {
-    const { tweetText } = req.body
-    if (!tweetText) {
-      return res.status(400).json({ message: 'Tweet text required' })
+    const { contentText } = req.body
+    if (!contentText) {
+      return res.status(400).json({ message: 'Content text required' })
     }
-    const result = await factChecker.analyzePost(tweetText)
+    const result = await factChecker.analyzePost(contentText)
     res.json(result)
   } catch (error) {
     res.status(500).json({ message: error.message })
@@ -262,7 +262,7 @@ class FactCheckerService {
 }
 
 // ✅ Frontend: Separated concerns
-// components/TweetInput.tsx (UI)
+// components/ContentInput.tsx (UI)
 // api/client.ts (API calls)
 // types/index.ts (Type definitions)
 ```
@@ -380,11 +380,11 @@ const row = stmt.get(normalized)
 **Issue Found:**
 ```typescript
 // Line 8 - BUG RISK
-export async function analyzePost(tweetText: string): Promise<AnalysisResult> {
+export async function analyzePost(contentText: string): Promise<AnalysisResult> {
   const response = await fetch(`${API_URL}/analyze`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ tweetText }),
+    body: JSON.stringify({ contentText }),
   })
   return response.json()
 }
@@ -394,11 +394,11 @@ export async function analyzePost(tweetText: string): Promise<AnalysisResult> {
 
 **Fix**:
 ```typescript
-export async function analyzePost(tweetText: string): Promise<AnalysisResult> {
+export async function analyzePost(contentText: string): Promise<AnalysisResult> {
   const response = await fetch(`${API_URL}/analyze`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ tweetText }),
+    body: JSON.stringify({ contentText }),
   })
 
   if (!response.ok) {
