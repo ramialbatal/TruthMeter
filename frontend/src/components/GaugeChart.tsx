@@ -88,10 +88,7 @@ export default function GaugeChart({ score, label }: GaugeChartProps) {
         <div className="text-5xl font-bold" style={{ color }}>
           {Math.round(score)}
         </div>
-        <div className="text-sm text-gray-600 dark:text-gray-400 mt-2 font-medium">
-          {label}
-        </div>
-        <div className="text-xs text-gray-500 dark:text-gray-500 mt-2 max-w-[250px]">
+        <div className="text-xs text-gray-500 dark:text-gray-500 mt-3 max-w-[250px]">
           {t('results.accuracy.explanation')}
         </div>
       </div>

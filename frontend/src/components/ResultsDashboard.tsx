@@ -142,7 +142,10 @@ export default function ResultsDashboard({ result }: ResultsDashboardProps) {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8">
           {/* Factual Accuracy Gauge */}
           <div className="flex justify-center animate-fade-in">
-            <div className="bg-gray-50 dark:bg-gray-700/30 rounded-xl p-6 w-full">
+            <div className="bg-gray-50 dark:bg-gray-700/30 rounded-xl p-6 w-full flex flex-col items-center justify-center relative">
+              <h3 className="text-lg sm:text-xl font-semibold text-gray-900 dark:text-white mb-4 text-center">
+                {t('results.accuracy.label')}
+              </h3>
               <GaugeChart
                 score={result.accuracyScore}
                 label={t('results.accuracy.label')}

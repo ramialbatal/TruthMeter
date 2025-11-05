@@ -83,12 +83,12 @@ export default function PieChart({
                 />
               ))}
             </Pie>
-            <Tooltip content={<CustomTooltip />} />
+            <Tooltip content={<CustomTooltip />} wrapperStyle={{ zIndex: 1000 }} />
           </RechartsPieChart>
         </ResponsiveContainer>
 
         {/* Center text overlay */}
-        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center pointer-events-none">
+        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center pointer-events-none z-0">
           <div className="text-sm text-gray-600 dark:text-gray-400">
             {t('results.sources.title')}
           </div>
