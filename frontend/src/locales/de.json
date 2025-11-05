@@ -77,6 +77,7 @@
     },
     "sources": {
       "title": "Quellen",
+      "count": "Quellen",
       "supporting": "Auswahl der wichtigsten unterstützenden Quellen (max 10)",
       "contradicting": "Auswahl der wichtigsten widersprüchlichen Quellen (max 10)",
       "neutral": "Auswahl der wichtigsten neutralen Quellen (max 10)",

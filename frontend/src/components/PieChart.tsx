@@ -1,5 +1,6 @@
 import { useTranslation } from 'react-i18next'
 import { PieChart as RechartsPieChart, Pie, Cell, ResponsiveContainer, Legend, Tooltip } from 'recharts'
+import { useState } from 'react'
 
 interface PieChartProps {
   agreementScore: number
@@ -15,6 +16,7 @@ export default function PieChart({
   totalSources,
 }: PieChartProps) {
   const { t } = useTranslation()
+  const [activeIndex, setActiveIndex] = useState<number | null>(null)
 
   // Calculate raw counts
   const agreementCount = Math.round((agreementScore / 100) * totalSources)
@@ -51,12 +53,17 @@ export default function PieChart({
         <div className="bg-white dark:bg-gray-800 p-3 rounded-lg shadow-lg border border-gray-200 dark:border-gray-700 z-50 relative">
           <p className="font-semibold text-gray-900 dark:text-white">{data.name}</p>
           <p className="text-sm text-gray-600 dark:text-gray-400">
-            {data.value.toFixed(1)}% ({data.count} {t('results.sources.title').toLowerCase()})
+            {data.value.toFixed(1)}% ({data.count} {t('results.sources.count').toLowerCase()})
           </p>
         </div>
       )
     }
     return null
+  }
+
+  // Handle click on pie segments for mobile
+  const handlePieClick = (data: any, index: number) => {
+    setActiveIndex(activeIndex === index ? null : index)
   }
 
   return (
@@ -74,16 +81,22 @@ export default function PieChart({
               dataKey="value"
               animationBegin={0}
               animationDuration={1000}
+              onClick={handlePieClick}
+              activeIndex={activeIndex ?? undefined}
             >
               {data.map((entry, index) => (
                 <Cell
                   key={`cell-${index}`}
                   fill={entry.color}
-                  style={{ outline: 'none' }}
+                  style={{ outline: 'none', cursor: 'pointer' }}
                 />
               ))}
             </Pie>
-            <Tooltip content={<CustomTooltip />} wrapperStyle={{ zIndex: 1000 }} />
+            <Tooltip
+              content={<CustomTooltip />}
+              wrapperStyle={{ zIndex: 1000 }}
+              trigger="hover"
+            />
           </RechartsPieChart>
         </ResponsiveContainer>
 
@@ -97,6 +110,16 @@ export default function PieChart({
           </div>
         </div>
       </div>
+
+      {/* Mobile tooltip - shows below chart on click */}
+      {activeIndex !== null && (
+        <div className="mt-4 bg-white dark:bg-gray-800 p-3 rounded-lg shadow-lg border border-gray-200 dark:border-gray-700 w-64 md:hidden">
+          <p className="font-semibold text-gray-900 dark:text-white">{data[activeIndex].name}</p>
+          <p className="text-sm text-gray-600 dark:text-gray-400">
+            {data[activeIndex].value.toFixed(1)}% ({data[activeIndex].count} {t('results.sources.count').toLowerCase()})
+          </p>
+        </div>
+      )}
     </div>
   )
 }

@@ -82,7 +82,8 @@
       "neutral": "顶级中立来源选择（最多10个）",
       "noSupporting": "未找到支持此声明的来源。",
       "noContradicting": "未找到与此声明矛盾的来源。",
-      "noNeutral": "未找到此声明的中立来源。"
+      "noNeutral": "未找到此声明的中立来源。",
+      "count": "来源"
     },
     "analyzedAt": "分析于：{{date}}"
   },
