@@ -289,7 +289,7 @@ You should see:
 ```
 ✓ TruthMeter API server running on http://localhost:3001
 ✓ Database: ./truthmeter.db
-✓ Ready to fact-check tweets!
+✓ Ready to fact-check content!
 ```
 
 **Terminal 2 - Frontend:**
@@ -351,7 +351,7 @@ PORT=3002
 1. Check API keys are valid
 2. Verify you have credits (Anthropic dashboard)
 3. Check backend logs for detailed errors
-4. Try a shorter tweet (some very long tweets may timeout)
+4. Try shorter content (some very long content may timeout)
 
 ## Next Steps
 
@@ -573,7 +573,7 @@ ON analyses(content_text_normalized);
    - ~90% cache hit rate expected
 
 2. **Database**
-   - Index on normalized tweet text
+   - Index on normalized content text
    - In-memory for development
    - Persistent file for production
 
@@ -623,7 +623,7 @@ See [SETUP.md](./SETUP.md) for deployment instructions.
 ```markdown
 # TruthMeter
 
-AI-powered tweet fact-checker that analyzes claims against credible web sources.
+AI-powered content fact-checker that analyzes claims against credible web sources.
 
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 [![Node](https://img.shields.io/badge/node-%3E%3D18-brightgreen.svg)](package.json)
@@ -699,19 +699,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 
 ### Added
 - User authentication system
-- History of analyzed tweets
+- History of analyzed content
 
 ### Changed
 - Improved caching logic
 
 ### Fixed
-- Bug with special characters in tweets
+- Bug with special characters in content
 
 ## [1.0.0] - 2025-11-05
 
 ### Added
 - Initial release
-- Tweet fact-checking with AI
+- Content fact-checking with AI
 - Web source search integration
 - Result caching (7-day TTL)
 - React frontend with Tailwind
