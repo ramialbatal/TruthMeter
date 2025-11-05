@@ -55,7 +55,7 @@ npm run dev
 You should see:
 ```
 TruthMeter API server running on http://localhost:3001
-Ready to fact-check tweets!
+Ready to fact-check content!
 ```
 
 **Terminal 2 - Frontend:**
@@ -76,13 +76,13 @@ Open your browser to: http://localhost:5173
 
 ## Testing the App
 
-Try pasting this example tweet:
+Try pasting this example content:
 
 ```
 The Earth is flat and scientists have been lying to us for centuries.
 ```
 
-Click "Analyze Tweet" and watch the magic happen!
+Click "Analyze Content" and watch the magic happen!
 
 ## Troubleshooting
 
