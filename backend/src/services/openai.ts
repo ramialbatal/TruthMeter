@@ -40,6 +40,7 @@ Please analyze the content and provide your response in the following JSON forma
   "accuracyScore": <number 0-100>,
   "agreementScore": <number 0-100>,
   "disagreementScore": <number 0-100>,
+  "neutralScore": <number 0-100>,
   "summary": "<concise explanation of findings>",
   "sources": [
     {
@@ -53,8 +54,10 @@ Please analyze the content and provide your response in the following JSON forma
 
 Guidelines:
 - accuracyScore: 0-100, where 100 means completely accurate, 0 means completely false
-- agreementScore: Percentage of sources that support the claim
-- disagreementScore: Percentage of sources that contradict the claim
+- agreementScore: (number of supporting sources / total sources) × 100
+- disagreementScore: (number of contradicting sources / total sources) × 100
+- neutralScore: (number of neutral sources / total sources) × 100
+- IMPORTANT: agreementScore + disagreementScore + neutralScore must equal 100
 - summary: Brief explanation of your findings (2-3 sentences)
 - sources: List each source with its relevance to the claim (supporting/contradicting/neutral)
 - Only include sources that are relevant to the claim
@@ -92,6 +95,7 @@ Respond with ONLY the JSON object, no additional text.`
         typeof analysis.accuracyScore !== 'number' ||
         typeof analysis.agreementScore !== 'number' ||
         typeof analysis.disagreementScore !== 'number' ||
+        typeof analysis.neutralScore !== 'number' ||
         typeof analysis.summary !== 'string' ||
         !Array.isArray(analysis.sources)
       ) {

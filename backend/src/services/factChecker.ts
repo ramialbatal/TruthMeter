@@ -41,6 +41,7 @@ export class FactCheckerService {
       accuracyScore: analysis.accuracyScore,
       agreementScore: analysis.agreementScore,
       disagreementScore: analysis.disagreementScore,
+      neutralScore: analysis.neutralScore,
       summary: analysis.summary,
       sources: analysis.sources,
       analyzedAt: new Date().toISOString(),
