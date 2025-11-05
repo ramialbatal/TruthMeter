@@ -6,8 +6,8 @@ interface ResultsDashboardProps {
 }
 
 export default function ResultsDashboard({ result }: ResultsDashboardProps) {
-  // Calculate neutral score
-  const neutralScore = 100 - result.agreementScore - result.disagreementScore
+  // Use neutral score from backend
+  const neutralScore = result.neutralScore
 
   const getScoreColor = (score: number) => {
     if (score >= 70) return 'text-green-600'

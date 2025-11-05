@@ -4,6 +4,7 @@ export interface AnalysisResult {
   accuracyScore: number;
   agreementScore: number;
   disagreementScore: number;
+  neutralScore: number;
   summary: string;
   sources: Source[];
   analyzedAt: string;
@@ -36,6 +37,7 @@ export interface ClaudeAnalysis {
   accuracyScore: number;
   agreementScore: number;
   disagreementScore: number;
+  neutralScore: number;
   summary: string;
   sources: Source[];
 }
