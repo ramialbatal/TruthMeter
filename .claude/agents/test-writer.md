@@ -534,7 +534,7 @@ describe('CacheService', () => {
 
       db.prepare(`
         INSERT INTO analyses (
-          id, tweet_text, tweet_text_normalized, accuracy_score,
+          id, content_text, content_text_normalized, accuracy_score,
           agreement_score, disagreement_score, summary, sources, created_at
         ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
       `).run('123', 'Old', 'old', 85, 70, 30, 'Summary', '[]', oldDate.toISOString())

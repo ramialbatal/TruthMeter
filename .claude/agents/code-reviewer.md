@@ -305,7 +305,7 @@ List bug risks and major problems:
 
 List code quality, TypeScript, and performance issues:
 ```
-1. [TYPE SAFETY] Using 'any' type in frontend/src/components/TweetInput.tsx:18
+1. [TYPE SAFETY] Using 'any' type in frontend/src/components/ContentInput.tsx:18
    - Issue: Type safety bypassed
    - Fix: Define proper interface
 ```
@@ -352,10 +352,10 @@ Highlight what's done well:
 **Issue Found:**
 ```typescript
 // Line 42 - CRITICAL SECURITY ISSUE
-const normalized = this.normalizeTweetText(tweetText)
+const normalized = this.normalizeContentText(contentText)
 const stmt = this.db.prepare(`
   SELECT * FROM analyses
-  WHERE tweet_text_normalized = '${normalized}'
+  WHERE content_text_normalized = '${normalized}'
 `)
 ```
 
@@ -363,10 +363,10 @@ const stmt = this.db.prepare(`
 
 **Fix**:
 ```typescript
-const normalized = this.normalizeTweetText(tweetText)
+const normalized = this.normalizeContentText(contentText)
 const stmt = this.db.prepare(`
   SELECT * FROM analyses
-  WHERE tweet_text_normalized = ?
+  WHERE content_text_normalized = ?
 `)
 const row = stmt.get(normalized)
 ```
@@ -417,7 +417,7 @@ export async function analyzePost(contentText: string): Promise<AnalysisResult> 
 **Issue Found:**
 ```typescript
 // Line 15 - TYPE SAFETY ISSUE
-async analyzePost(tweetText: string): Promise<any> {
+async analyzePost(contentText: string): Promise<any> {
   // ...
 }
 ```
@@ -426,7 +426,7 @@ async analyzePost(tweetText: string): Promise<any> {
 
 **Fix**:
 ```typescript
-async analyzePost(tweetText: string): Promise<AnalysisResult> {
+async analyzePost(contentText: string): Promise<AnalysisResult> {
   // ...
 }
 ```
