@@ -1,6 +1,6 @@
 export interface AnalysisResult {
   id: string;
-  tweetText: string;
+  contentText: string;
   accuracyScore: number;
   agreementScore: number;
   disagreementScore: number;
@@ -18,5 +18,5 @@ export interface Source {
 }
 
 export interface AnalysisRequest {
-  tweetText: string;
+  contentText: string;
 }

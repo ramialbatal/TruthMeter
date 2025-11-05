@@ -7,8 +7,8 @@ export function initializeDatabase(dbPath: string): Database.Database {
   db.exec(`
     CREATE TABLE IF NOT EXISTS analyses (
       id TEXT PRIMARY KEY,
-      tweet_text TEXT NOT NULL,
-      tweet_text_normalized TEXT NOT NULL,
+      content_text TEXT NOT NULL,
+      content_text_normalized TEXT NOT NULL,
       accuracy_score INTEGER NOT NULL,
       agreement_score INTEGER NOT NULL,
       disagreement_score INTEGER NOT NULL,
@@ -20,8 +20,8 @@ export function initializeDatabase(dbPath: string): Database.Database {
 
   // Create index for faster lookups
   db.exec(`
-    CREATE INDEX IF NOT EXISTS idx_tweet_text_normalized
-    ON analyses(tweet_text_normalized)
+    CREATE INDEX IF NOT EXISTS idx_content_text_normalized
+    ON analyses(content_text_normalized)
   `)
 
   return db

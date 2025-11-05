@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import TweetInput from './components/TweetInput'
+import ContentInput from './components/ContentInput'
 import ResultsDashboard from './components/ResultsDashboard'
 import DarkModeToggle from './components/DarkModeToggle'
 import HistorySidebar from './components/HistorySidebar'
@@ -20,10 +20,10 @@ function App() {
     addToHistory(newResult)
   }
 
-  const handleHistorySelect = async (tweetText: string) => {
+  const handleHistorySelect = async (contentText: string) => {
     setIsAnalyzing(true)
     try {
-      const analysisResult = await analyzePost(tweetText)
+      const analysisResult = await analyzePost(contentText)
       handleResult(analysisResult)
     } catch (error) {
       console.error('Error re-analyzing from history:', error)
@@ -75,7 +75,7 @@ function App() {
 
         <div className="max-w-4xl mx-auto space-y-6 sm:space-y-8">
           <div className="animate-slide-up">
-            <TweetInput onResult={handleResult} />
+            <ContentInput onResult={handleResult} />
           </div>
 
           {isAnalyzing && (

@@ -12,7 +12,7 @@ export class OpenAIService {
   }
 
   async analyzeFactCheck(
-    tweetText: string,
+    contentText: string,
     sources: TavilySearchResult[]
   ): Promise<ClaudeAnalysis> {
     try {
@@ -27,15 +27,15 @@ Content: ${source.content.substring(0, 500)}...
         )
         .join('\n')
 
-      const prompt = `You are a fact-checking assistant. Analyze the provided tweet against credible sources and determine its factual accuracy.
+      const prompt = `You are a fact-checking assistant. Analyze the provided content against credible sources and determine its factual accuracy.
 
-Tweet to analyze:
-"${tweetText}"
+Content to analyze:
+"${contentText}"
 
 Sources found:
 ${sourcesText}
 
-Please analyze the tweet and provide your response in the following JSON format:
+Please analyze the content and provide your response in the following JSON format:
 {
   "accuracyScore": <number 0-100>,
   "agreementScore": <number 0-100>,
@@ -102,9 +102,9 @@ Respond with ONLY the JSON object, no additional text.`
     } catch (error) {
       console.error('OpenAI analysis error:', error)
       if (error instanceof Error && error.message.includes('JSON')) {
-        throw new Error('Failed to analyze tweet. Please try again.')
+        throw new Error('Failed to analyze content. Please try again.')
       }
-      throw new Error('Failed to analyze tweet with AI. Please try again.')
+      throw new Error('Failed to analyze content with AI. Please try again.')
     }
   }
 }

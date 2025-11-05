@@ -1,14 +1,14 @@
 # TruthMeter 🔍
 
-**A Twitter/X post fact-checker that analyzes claims against credible web sources using AI.**
+**A content fact-checker that analyzes claims against credible web sources using AI.**
 
-TruthMeter helps you verify the accuracy of social media posts by automatically searching credible sources and providing an AI-powered analysis with factual accuracy scores, supporting evidence, and source citations.
+TruthMeter helps you verify the accuracy of any text content by automatically searching credible sources and providing an AI-powered analysis with factual accuracy scores, supporting evidence, and source citations.
 
 ---
 
 ## ✨ Features
 
-- **Automated Fact-Checking**: Paste any tweet text and get instant fact-check results
+- **Automated Fact-Checking**: Paste any text content and get instant fact-check results
 - **AI-Powered Analysis**: Uses GPT-4 to analyze claims against credible sources
 - **Source Citations**: View all sources used in the analysis with direct links
 - **Accuracy Scoring**: Get clear metrics including:
@@ -124,14 +124,14 @@ Navigate to **http://localhost:5173** in your web browser.
 
 ## 📖 How to Use
 
-1. **Paste Tweet Text**: Copy any tweet/post text and paste it into the input field
-2. **Click "Check Facts"**: The system will analyze the content (takes 10-30 seconds)
+1. **Paste Content Text**: Copy any text content and paste it into the input field
+2. **Click "Analyze Content"**: The system will analyze the content (takes 10-30 seconds)
 3. **View Results**: See the accuracy score, analysis summary, and source citations
 4. **Explore Sources**: Click on source links to verify information yourself
 
 ### Example
 
-Try pasting this sample tweet:
+Try pasting this sample content:
 ```
 "Breaking: Scientists discover that drinking 8 glasses of water a day is actually a myth with no scientific backing."
 ```
@@ -210,7 +210,7 @@ TruthMeter/
 
 ### API Errors
 
-**Error: "Failed to analyze tweet"**
+**Error: "Failed to analyze content"**
 - Check your OpenAI API key is valid and has credits
 - Verify your Tavily API key is correct
 - Check the backend console for detailed error messages
@@ -255,12 +255,12 @@ npm run type-check   # Check TypeScript types
 ## 🌐 API Endpoints
 
 ### POST /api/analyze
-Analyzes a tweet for factual accuracy.
+Analyzes content for factual accuracy.
 
 **Request:**
 ```json
 {
-  "tweetText": "Your tweet text here..."
+  "contentText": "Your content text here..."
 }
 ```
 
@@ -268,7 +268,7 @@ Analyzes a tweet for factual accuracy.
 ```json
 {
   "id": "uuid",
-  "tweetText": "Your tweet text here...",
+  "contentText": "Your content text here...",
   "accuracyScore": 75,
   "agreementScore": 60,
   "disagreementScore": 20,
@@ -314,7 +314,7 @@ MIT License - feel free to use this project for any purpose.
 ## 💡 Tips
 
 - **First run**: The first analysis takes longer as it downloads AI models
-- **Caching**: Identical tweets return cached results instantly
+- **Caching**: Identical content returns cached results instantly
 - **Cost**: Each analysis uses OpenAI API credits (~$0.01-0.05 per check)
 - **Accuracy**: Results are as good as the sources found - always verify yourself!
 
