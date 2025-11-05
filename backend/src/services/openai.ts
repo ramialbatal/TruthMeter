@@ -47,6 +47,24 @@ export class OpenAIService {
     return { agreementScore, disagreementScore, neutralScore }
   }
 
+  /**
+   * Filter and rank sources to keep top 3 per category based on credibility score
+   */
+  private filterTopSources(sources: ClaudeAnalysis['sources']): ClaudeAnalysis['sources'] {
+    // Group sources by relevance
+    const supporting = sources.filter(s => s.relevance === 'supporting')
+    const contradicting = sources.filter(s => s.relevance === 'contradicting')
+    const neutral = sources.filter(s => s.relevance === 'neutral')
+
+    // Sort each group by score (highest first) and take top 3
+    const topSupporting = supporting.sort((a, b) => b.score - a.score).slice(0, 3)
+    const topContradicting = contradicting.sort((a, b) => b.score - a.score).slice(0, 3)
+    const topNeutral = neutral.sort((a, b) => b.score - a.score).slice(0, 3)
+
+    // Combine and return
+    return [...topSupporting, ...topContradicting, ...topNeutral]
+  }
+
   async analyzeFactCheck(
     contentText: string,
     sources: TavilySearchResult[]
@@ -58,6 +76,7 @@ export class OpenAIService {
             `Source ${idx + 1}:
 Title: ${source.title}
 URL: ${source.url}
+Credibility Score: ${source.score}
 Content: ${source.content.substring(0, 500)}...
 `
         )
@@ -83,7 +102,8 @@ Please analyze the content and provide your response in the following JSON forma
       "url": "<source url>",
       "title": "<source title>",
       "snippet": "<relevant excerpt from source>",
-      "relevance": "supporting" | "contradicting" | "neutral"
+      "relevance": "supporting" | "contradicting" | "neutral",
+      "score": <credibility score from source>
     }
   ]
 }
@@ -96,8 +116,10 @@ Guidelines:
 - IMPORTANT: agreementScore + disagreementScore + neutralScore must equal 100
 - Use floating point numbers with decimal precision for all percentage scores
 - summary: Brief explanation of your findings (2-3 sentences)
-- sources: List each source with its relevance to the claim (supporting/contradicting/neutral)
-- Only include sources that are relevant to the claim
+- sources: MUST include ALL ${sources.length} sources provided above with their classification
+- For each source, determine if it is "supporting", "contradicting", or "neutral" to the claim
+- Include the credibility score from each source
+- Extract a relevant snippet (2-3 sentences) from each source
 - Be objective and cite specific information from sources
 
 Respond with ONLY the JSON object, no additional text.`
@@ -149,12 +171,16 @@ Respond with ONLY the JSON object, no additional text.`
       // Round accuracy score to one decimal place
       const accuracyScore = parseFloat(analysis.accuracyScore.toFixed(1))
 
+      // Filter to top 3 sources per category based on credibility
+      const filteredSources = this.filterTopSources(analysis.sources)
+
       return {
         ...analysis,
         accuracyScore,
         agreementScore: normalized.agreementScore,
         disagreementScore: normalized.disagreementScore,
         neutralScore: normalized.neutralScore,
+        sources: filteredSources,
       }
     } catch (error) {
       console.error('OpenAI analysis error:', error)

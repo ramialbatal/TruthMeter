@@ -36,6 +36,7 @@ export class CacheService {
       neutralScore: row.neutral_score || 0,
       summary: row.summary,
       sources: JSON.parse(row.sources) as Source[],
+      totalSourcesRetrieved: row.total_sources_retrieved || 10,
       analyzedAt: row.created_at,
       cached: true,
     }
@@ -47,8 +48,8 @@ export class CacheService {
     const stmt = this.db.prepare(`
       INSERT INTO analyses (
         id, content_text, content_text_normalized, accuracy_score,
-        agreement_score, disagreement_score, neutral_score, summary, sources
-      ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+        agreement_score, disagreement_score, neutral_score, summary, sources, total_sources_retrieved
+      ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
     `)
 
     stmt.run(
@@ -60,7 +61,8 @@ export class CacheService {
       result.disagreementScore,
       result.neutralScore,
       result.summary,
-      JSON.stringify(result.sources)
+      JSON.stringify(result.sources),
+      result.totalSourcesRetrieved
     )
   }
 
@@ -84,6 +86,7 @@ export class CacheService {
       neutralScore: row.neutral_score || 0,
       summary: row.summary,
       sources: JSON.parse(row.sources) as Source[],
+      totalSourcesRetrieved: row.total_sources_retrieved || 10,
       analyzedAt: row.created_at,
       cached: false,
     }
