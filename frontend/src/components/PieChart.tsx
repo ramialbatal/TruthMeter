@@ -48,10 +48,10 @@ export default function PieChart({
     if (active && payload && payload.length) {
       const data = payload[0].payload
       return (
-        <div className="bg-white dark:bg-gray-800 p-3 rounded-lg shadow-lg border border-gray-200 dark:border-gray-700">
+        <div className="bg-white dark:bg-gray-800 p-3 rounded-lg shadow-lg border border-gray-200 dark:border-gray-700 z-50 relative">
           <p className="font-semibold text-gray-900 dark:text-white">{data.name}</p>
           <p className="text-sm text-gray-600 dark:text-gray-400">
-            {data.value.toFixed(1)}% ({data.count} sources)
+            {data.value.toFixed(1)}% ({data.count} {t('results.sources.title').toLowerCase()})
           </p>
         </div>
       )
@@ -96,26 +96,6 @@ export default function PieChart({
             {totalSources}
           </div>
         </div>
-      </div>
-
-      {/* Legend */}
-      <div className="mt-6 space-y-3 w-full max-w-xs">
-        {data.map((entry, index) => (
-          <div key={index} className="flex items-center gap-3">
-            <div
-              className="w-4 h-4 rounded-full flex-shrink-0"
-              style={{ backgroundColor: entry.color }}
-            ></div>
-            <div className="flex-1">
-              <div className="text-sm font-medium text-gray-900 dark:text-white">
-                {entry.name}
-              </div>
-              <div className="text-xs text-gray-600 dark:text-gray-400">
-                {entry.value.toFixed(1)}% ({entry.count} sources)
-              </div>
-            </div>
-          </div>
-        ))}
       </div>
     </div>
   )

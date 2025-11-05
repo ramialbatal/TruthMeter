@@ -77,9 +77,9 @@
     },
     "sources": {
       "title": "来源",
-      "supporting": "顶级支持来源选择（最多3个）",
-      "contradicting": "顶级矛盾来源选择（最多3个）",
-      "neutral": "顶级中立来源选择（最多3个）",
+      "supporting": "顶级支持来源选择（最多10个）",
+      "contradicting": "顶级矛盾来源选择（最多10个）",
+      "neutral": "顶级中立来源选择（最多10个）",
       "noSupporting": "未找到支持此声明的来源。",
       "noContradicting": "未找到与此声明矛盾的来源。",
       "noNeutral": "未找到此声明的中立来源。"

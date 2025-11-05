@@ -77,9 +77,9 @@
     },
     "sources": {
       "title": "Kaynaklar",
-      "supporting": "En İyi Destekleyici Kaynaklar Seçimi (maks 3)",
-      "contradicting": "En İyi Karşıt Kaynaklar Seçimi (maks 3)",
-      "neutral": "En İyi Tarafsız Kaynaklar Seçimi (maks 3)",
+      "supporting": "En İyi Destekleyici Kaynaklar Seçimi (maks 10)",
+      "contradicting": "En İyi Karşıt Kaynaklar Seçimi (maks 10)",
+      "neutral": "En İyi Tarafsız Kaynaklar Seçimi (maks 10)",
       "noSupporting": "Bu iddia için destekleyici kaynak bulunamadı.",
       "noContradicting": "Bu iddia için karşıt kaynak bulunamadı.",
       "noNeutral": "Bu iddia için tarafsız kaynak bulunamadı."

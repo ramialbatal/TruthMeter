@@ -66,9 +66,9 @@
     },
     "sources": {
       "title": "Sources",
-      "supporting": "Sélection des Meilleures Sources Favorables (max 3)",
-      "contradicting": "Sélection des Meilleures Sources Contradictoires (max 3)",
-      "neutral": "Sélection des Meilleures Sources Neutres (max 3)",
+      "supporting": "Sélection des Meilleures Sources Favorables (max 10)",
+      "contradicting": "Sélection des Meilleures Sources Contradictoires (max 10)",
+      "neutral": "Sélection des Meilleures Sources Neutres (max 10)",
       "noSupporting": "Aucune source favorable trouvée pour cette affirmation.",
       "noContradicting": "Aucune source contradictoire trouvée pour cette affirmation.",
       "noNeutral": "Aucune source neutre trouvée pour cette affirmation."
