@@ -489,7 +489,7 @@ const log = {
 }
 
 // Use it
-log.info('Analysis started', { tweetLength: tweetText.length })
+log.info('Analysis started', { contentLength: contentText.length })
 log.error('Tavily API failed', error)
 ```
 
@@ -534,11 +534,11 @@ curl -X POST https://your-api.railway.app/analyze \
 
 **✅ Integration Tests:**
 ```
-1. Submit a tweet from frontend
+1. Submit content from frontend
 2. Verify it calls backend
 3. Check results display
-4. Verify caching works (submit same tweet twice)
-5. Test error handling (submit empty tweet)
+4. Verify caching works (submit same content twice)
+5. Test error handling (submit empty content)
 6. Test different browsers (Chrome, Firefox, Safari)
 ```
 
