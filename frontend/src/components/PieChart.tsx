@@ -1,0 +1,122 @@
+import { useTranslation } from 'react-i18next'
+import { PieChart as RechartsPieChart, Pie, Cell, ResponsiveContainer, Legend, Tooltip } from 'recharts'
+
+interface PieChartProps {
+  agreementScore: number
+  disagreementScore: number
+  neutralScore: number
+  totalSources: number
+}
+
+export default function PieChart({
+  agreementScore,
+  disagreementScore,
+  neutralScore,
+  totalSources,
+}: PieChartProps) {
+  const { t } = useTranslation()
+
+  // Calculate raw counts
+  const agreementCount = Math.round((agreementScore / 100) * totalSources)
+  const disagreementCount = Math.round((disagreementScore / 100) * totalSources)
+  const neutralCount = Math.round((neutralScore / 100) * totalSources)
+
+  // Data for pie chart
+  const data = [
+    {
+      name: t('results.agreement.label'),
+      value: agreementScore,
+      count: agreementCount,
+      color: '#16a34a', // green-600
+    },
+    {
+      name: t('results.disagreement.label'),
+      value: disagreementScore,
+      count: disagreementCount,
+      color: '#dc2626', // red-600
+    },
+    {
+      name: t('results.neutral.label'),
+      value: neutralScore,
+      count: neutralCount,
+      color: '#6b7280', // gray-600
+    },
+  ]
+
+  // Custom tooltip
+  const CustomTooltip = ({ active, payload }: any) => {
+    if (active && payload && payload.length) {
+      const data = payload[0].payload
+      return (
+        <div className="bg-white dark:bg-gray-800 p-3 rounded-lg shadow-lg border border-gray-200 dark:border-gray-700">
+          <p className="font-semibold text-gray-900 dark:text-white">{data.name}</p>
+          <p className="text-sm text-gray-600 dark:text-gray-400">
+            {data.value.toFixed(1)}% ({data.count} sources)
+          </p>
+        </div>
+      )
+    }
+    return null
+  }
+
+  return (
+    <div className="flex flex-col items-center">
+      <div className="relative">
+        <ResponsiveContainer width={300} height={300}>
+          <RechartsPieChart>
+            <Pie
+              data={data}
+              cx="50%"
+              cy="50%"
+              innerRadius={60}
+              outerRadius={100}
+              paddingAngle={2}
+              dataKey="value"
+              animationBegin={0}
+              animationDuration={1000}
+            >
+              {data.map((entry, index) => (
+                <Cell
+                  key={`cell-${index}`}
+                  fill={entry.color}
+                  style={{ outline: 'none' }}
+                />
+              ))}
+            </Pie>
+            <Tooltip content={<CustomTooltip />} />
+          </RechartsPieChart>
+        </ResponsiveContainer>
+
+        {/* Center text overlay */}
+        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center pointer-events-none">
+          <div className="text-sm text-gray-600 dark:text-gray-400">
+            {t('results.sources.title')}
+          </div>
+          <div className="text-3xl font-bold text-gray-900 dark:text-white">
+            {totalSources}
+          </div>
+        </div>
+      </div>
+
+      {/* Legend */}
+      <div className="mt-6 space-y-3 w-full max-w-xs">
+        {data.map((entry, index) => (
+          <div key={index} className="flex items-center gap-3">
+            <div
+              className="w-4 h-4 rounded-full flex-shrink-0"
+              style={{ backgroundColor: entry.color }}
+            ></div>
+            <div className="flex-1">
+              <div className="text-sm font-medium text-gray-900 dark:text-white">
+                {entry.name}
+              </div>
+              <div className="text-xs text-gray-600 dark:text-gray-400">
+                {entry.value.toFixed(1)}% ({entry.count} sources)
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  )
+}

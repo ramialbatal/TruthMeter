@@ -12,6 +12,18 @@ export class OpenAIService {
   }
 
   /**
+   * Sanitize JSON string by removing problematic patterns
+   */
+  private sanitizeJsonString(jsonStr: string): string {
+    // Try to extract JSON object if wrapped in markdown code blocks
+    const jsonMatch = jsonStr.match(/\{[\s\S]*\}/)
+    if (jsonMatch) {
+      return jsonMatch[0]
+    }
+    return jsonStr
+  }
+
+  /**
    * Normalize percentages to ensure they sum to exactly 100% with one decimal place
    */
   private normalizePercentages(agreement: number, disagreement: number, neutral: number): {
@@ -65,128 +77,197 @@ export class OpenAIService {
     return [...topSupporting, ...topContradicting, ...topNeutral]
   }
 
+  /**
+   * Categorize a batch of sources in parallel
+   */
+  private async categorizeBatch(
+    contentText: string,
+    sources: TavilySearchResult[],
+    batchNumber: number
+  ): Promise<{ sources: { url: string; title: string; relevance: 'supporting' | 'contradicting' | 'neutral' }[] }> {
+    const sourcesText = sources
+      .map(
+        (source, idx) =>
+          `${idx + 1}. ${source.title}
+URL: ${source.url}
+Content: ${source.content.substring(0, 200)}...
+`
+      )
+      .join('\n')
+
+    const prompt = `You are a fact-checking assistant. Categorize each of these ${sources.length} sources based on the claim.
+
+Claim: "${contentText}"
+
+Sources (batch ${batchNumber}):
+${sourcesText}
+
+For each source, determine if it is:
+- "supporting": The source supports or agrees with the claim
+- "contradicting": The source contradicts or disagrees with the claim
+- "neutral": The source is neutral, unrelated, or provides mixed information
+
+Respond with JSON:
+{
+  "sources": [
+    {
+      "url": "<exact source url>",
+      "title": "<exact source title>",
+      "relevance": "supporting" | "contradicting" | "neutral"
+    }
+  ]
+}
+
+Return ALL ${sources.length} sources with their categorization. Respond with valid JSON only.`
+
+    const completion = await this.client.chat.completions.create({
+      model: 'gpt-4o-mini',
+      messages: [
+        {
+          role: 'system',
+          content: 'You are a fact-checking assistant. Respond with valid JSON only.',
+        },
+        {
+          role: 'user',
+          content: prompt,
+        },
+      ],
+      temperature: 0.3,
+      max_tokens: 4096,
+      response_format: { type: 'json_object' },
+    })
+
+    const responseText = completion.choices[0]?.message?.content
+    if (!responseText) {
+      throw new Error('No response from OpenAI')
+    }
+
+    const sanitizedResponse = this.sanitizeJsonString(responseText)
+    const result = JSON.parse(sanitizedResponse)
+
+    return result
+  }
+
   async analyzeFactCheck(
     contentText: string,
     sources: TavilySearchResult[]
   ): Promise<ClaudeAnalysis> {
     try {
-      const sourcesText = sources
-        .map(
-          (source, idx) =>
-            `Source ${idx + 1}:
-Title: ${source.title}
-URL: ${source.url}
-Credibility Score: ${source.score}
-Content: ${source.content.substring(0, 500)}...
-`
-        )
-        .join('\n')
+      console.log(`Analyzing ${sources.length} sources in parallel batches...`)
 
-      const prompt = `You are a fact-checking assistant. Analyze the provided content against credible sources and determine its factual accuracy.
+      // Split sources into 5 batches
+      const batchSize = Math.ceil(sources.length / 5)
+      const batches: TavilySearchResult[][] = []
+      for (let i = 0; i < sources.length; i += batchSize) {
+        batches.push(sources.slice(i, i + batchSize))
+      }
 
-Content to analyze:
-"${contentText}"
+      console.log(`Split into ${batches.length} batches of ~${batchSize} sources each`)
 
-Sources found:
-${sourcesText}
+      // Process all batches in parallel
+      const batchPromises = batches.map((batch, index) =>
+        this.categorizeBatch(contentText, batch, index + 1)
+      )
 
-Please analyze the content and provide your response in the following JSON format:
+      const batchResults = await Promise.all(batchPromises)
+      console.log(`Completed ${batchResults.length} parallel categorizations`)
+
+      // Combine all categorized sources
+      const allCategorizedSources = batchResults.flatMap(result => result.sources)
+      console.log(`Total categorized sources: ${allCategorizedSources.length}`)
+
+      // Calculate percentages
+      const supportingCount = allCategorizedSources.filter(s => s.relevance === 'supporting').length
+      const contradictingCount = allCategorizedSources.filter(s => s.relevance === 'contradicting').length
+      const neutralCount = allCategorizedSources.filter(s => s.relevance === 'neutral').length
+
+      const total = allCategorizedSources.length
+      const agreementScore = parseFloat(((supportingCount / total) * 100).toFixed(1))
+      const disagreementScore = parseFloat(((contradictingCount / total) * 100).toFixed(1))
+      let neutralScore = parseFloat(((neutralCount / total) * 100).toFixed(1))
+
+      // Ensure they sum to 100
+      const sum = agreementScore + disagreementScore + neutralScore
+      if (sum !== 100) {
+        neutralScore = parseFloat((neutralScore + (100 - sum)).toFixed(1))
+      }
+
+      console.log(`Categorization: ${supportingCount} supporting, ${contradictingCount} contradicting, ${neutralCount} neutral`)
+
+      // Generate summary with a separate quick call
+      const summaryPrompt = `Based on fact-checking analysis: The claim "${contentText}" was analyzed against ${total} sources. ${supportingCount} sources support it (${agreementScore}%), ${contradictingCount} contradict it (${disagreementScore}%), and ${neutralCount} are neutral (${neutralScore}%). Write a brief 2-3 sentence summary of these findings and provide an accuracy score (0-100).
+
+Respond with JSON:
 {
   "accuracyScore": <number 0-100>,
-  "agreementScore": <number 0-100>,
-  "disagreementScore": <number 0-100>,
-  "neutralScore": <number 0-100>,
-  "summary": "<concise explanation of findings>",
-  "sources": [
-    {
-      "url": "<source url>",
-      "title": "<source title>",
-      "snippet": "<relevant excerpt from source>",
-      "relevance": "supporting" | "contradicting" | "neutral",
-      "score": <credibility score from source>
-    }
-  ]
+  "summary": "<2-3 sentence summary>"
+}`
+
+      const summaryCompletion = await this.client.chat.completions.create({
+        model: 'gpt-4o-mini',
+        messages: [
+          { role: 'system', content: 'You are a fact-checking assistant. Respond with valid JSON only.' },
+          { role: 'user', content: summaryPrompt }
+        ],
+        temperature: 0.3,
+        max_tokens: 500,
+        response_format: { type: 'json_object' },
+      })
+
+      const summaryText = summaryCompletion.choices[0]?.message?.content
+      const summaryData = summaryText ? JSON.parse(summaryText) : { accuracyScore: 50, summary: 'Analysis completed.' }
+
+      // Translate summary to all languages in one call
+      console.log('Translating summary to all languages...')
+      const translationPrompt = `Translate this fact-checking summary to the following 13 languages. Keep translations concise and accurate.
+
+Summary in English: "${summaryData.summary}"
+
+Provide translations in JSON format:
+{
+  "ar": "Arabic translation",
+  "fr": "French translation",
+  "tr": "Turkish translation",
+  "fa": "Farsi translation",
+  "ur": "Urdu translation",
+  "hi": "Hindi translation",
+  "es": "Spanish translation",
+  "de": "German translation",
+  "pt": "Portuguese translation",
+  "ja": "Japanese translation",
+  "zh": "Chinese translation",
+  "it": "Italian translation",
+  "sv": "Swedish translation"
 }
 
-Guidelines:
-- accuracyScore: 0-100, where 100 means completely accurate, 0 means completely false
-- agreementScore: (number of supporting sources / total sources) × 100 (use decimal precision)
-- disagreementScore: (number of contradicting sources / total sources) × 100 (use decimal precision)
-- neutralScore: (number of neutral sources / total sources) × 100 (use decimal precision)
-- IMPORTANT: agreementScore + disagreementScore + neutralScore must equal 100
-- Use floating point numbers with decimal precision for all percentage scores
-- summary: Brief explanation of your findings (2-3 sentences)
-- sources: MUST include ALL ${sources.length} sources provided above with their classification
-- For each source, determine if it is "supporting", "contradicting", or "neutral" to the claim
-- Include the credibility score from each source
-- Extract a relevant snippet (2-3 sentences) from each source
-- Be objective and cite specific information from sources
+Respond with valid JSON only.`
 
-Respond with ONLY the JSON object, no additional text.`
-
-      const completion = await this.client.chat.completions.create({
-        model: 'gpt-4-turbo-preview',
+      const translationCompletion = await this.client.chat.completions.create({
+        model: 'gpt-4o-mini',
         messages: [
-          {
-            role: 'system',
-            content: 'You are a fact-checking assistant that provides accurate, unbiased analysis. Always respond with valid JSON only.',
-          },
-          {
-            role: 'user',
-            content: prompt,
-          },
+          { role: 'system', content: 'You are a professional translator. Respond with valid JSON only.' },
+          { role: 'user', content: translationPrompt }
         ],
         temperature: 0.3,
         max_tokens: 2000,
         response_format: { type: 'json_object' },
       })
 
-      const responseText = completion.choices[0]?.message?.content
-      if (!responseText) {
-        throw new Error('No response from OpenAI')
-      }
-
-      // Parse the JSON response
-      const analysis: ClaudeAnalysis = JSON.parse(responseText)
-
-      // Validate the response
-      if (
-        typeof analysis.accuracyScore !== 'number' ||
-        typeof analysis.agreementScore !== 'number' ||
-        typeof analysis.disagreementScore !== 'number' ||
-        typeof analysis.neutralScore !== 'number' ||
-        typeof analysis.summary !== 'string' ||
-        !Array.isArray(analysis.sources)
-      ) {
-        throw new Error('Invalid response format from OpenAI')
-      }
-
-      // Normalize percentages to ensure they sum to exactly 100% with one decimal place
-      const normalized = this.normalizePercentages(
-        analysis.agreementScore,
-        analysis.disagreementScore,
-        analysis.neutralScore
-      )
-
-      // Round accuracy score to one decimal place
-      const accuracyScore = parseFloat(analysis.accuracyScore.toFixed(1))
-
-      // Filter to top 3 sources per category based on credibility
-      const filteredSources = this.filterTopSources(analysis.sources)
+      const translationText = translationCompletion.choices[0]?.message?.content
+      const summaryTranslations = translationText ? JSON.parse(translationText) : {}
+      console.log(`Summary translated to ${Object.keys(summaryTranslations).length} languages`)
 
       return {
-        ...analysis,
-        accuracyScore,
-        agreementScore: normalized.agreementScore,
-        disagreementScore: normalized.disagreementScore,
-        neutralScore: normalized.neutralScore,
-        sources: filteredSources,
+        accuracyScore: parseFloat(summaryData.accuracyScore.toFixed(1)),
+        agreementScore,
+        disagreementScore,
+        neutralScore,
+        summary: summaryData.summary,
+        summaryTranslations,
+        sources: allCategorizedSources,
       }
     } catch (error) {
       console.error('OpenAI analysis error:', error)
-      if (error instanceof Error && error.message.includes('JSON')) {
-        throw new Error('Failed to analyze content. Please try again.')
-      }
       throw new Error('Failed to analyze content with AI. Please try again.')
     }
   }

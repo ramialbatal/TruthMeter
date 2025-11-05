@@ -1,0 +1,95 @@
+{
+  "app": {
+    "title": "TruthMeter",
+    "subtitle": "AI-संचालित तथ्य जांचकर्ता"
+  },
+  "common": {
+    "loading": "लोड हो रहा है...",
+    "error": "त्रुटि",
+    "analyzing": "विश्लेषण हो रहा है...",
+    "analyzingFromHistory": "इतिहास से विश्लेषण हो रहा है..."
+  },
+  "darkMode": {
+    "toggle": "डार्क मोड टॉगल करें"
+  },
+  "language": {
+    "select": "भाषा चुनें",
+    "en": "English",
+    "ar": "العربية",
+    "fr": "Français",
+    "tr": "Türkçe",
+    "fa": "فارسی",
+    "ur": "اردو",
+    "hi": "हिन्दी",
+    "es": "Español",
+    "de": "Deutsch",
+    "pt": "Português",
+    "ja": "日本語",
+    "zh": "中文",
+    "it": "Italiano",
+    "sv": "Svenska"
+  },
+  "history": {
+    "title": "इतिहास",
+    "viewHistory": "इतिहास देखें",
+    "noHistory": "अभी तक कोई विश्लेषण इतिहास नहीं",
+    "clear": "सभी साफ़ करें",
+    "confirmClear": "क्या आप वाकई सारा इतिहास साफ़ करना चाहते हैं?",
+    "itemsCount": "{{count}} आइटम"
+  },
+  "input": {
+    "label": "तथ्य-जांच के लिए सामग्री पेस्ट करें",
+    "placeholder": "जिस पाठ को आप जांचना चाहते हैं उसे पेस्ट करें...",
+    "button": "सामग्री का विश्लेषण करें",
+    "validation": {
+      "required": "सामग्री पाठ आवश्यक है",
+      "minLength": "सामग्री कम से कम 10 वर्णों की होनी चाहिए",
+      "maxLength": "सामग्री 2000 वर्णों से कम होनी चाहिए"
+    }
+  },
+  "results": {
+    "title": "विश्लेषण परिणाम",
+    "cached": "कैश किया गया परिणाम",
+    "percentagesFrom": "प्रतिशत {{count}} स्रोतों से गणना की गई",
+    "sourceDistribution": "स्रोत वितरण",
+    "accuracy": {
+      "label": "तथ्यात्मक सटीकता",
+      "outOf": "100 में से",
+      "explanation": "स्रोत विश्वसनीयता और सहमति के आधार पर"
+    },
+    "agreement": {
+      "label": "सहमति",
+      "sourceCount": "({{total}} में से {{count}} स्रोत)",
+      "description": "स्रोत सहमत हैं"
+    },
+    "disagreement": {
+      "label": "असहमति",
+      "sourceCount": "({{total}} में से {{count}} स्रोत)",
+      "description": "स्रोत असहमत हैं"
+    },
+    "neutral": {
+      "label": "तटस्थ",
+      "sourceCount": "({{total}} में से {{count}} स्रोत)",
+      "description": "स्रोत तटस्थ"
+    },
+    "summary": {
+      "title": "सारांश"
+    },
+    "sources": {
+      "title": "स्रोत",
+      "supporting": "शीर्ष सहायक स्रोतों का चयन (अधिकतम 3)",
+      "contradicting": "शीर्ष विरोधाभासी स्रोतों का चयन (अधिकतम 3)",
+      "neutral": "शीर्ष तटस्थ स्रोतों का चयन (अधिकतम 3)",
+      "noSupporting": "इस दावे के लिए कोई सहायक स्रोत नहीं मिला।",
+      "noContradicting": "इस दावे के लिए कोई विरोधाभासी स्रोत नहीं मिला।",
+      "noNeutral": "इस दावे के लिए कोई तटस्थ स्रोत नहीं मिला।"
+    },
+    "analyzedAt": "विश्लेषण किया गया: {{date}}"
+  },
+  "share": {
+    "button": "साझा करें",
+    "tooltip": "इस विश्लेषण को साझा करें",
+    "copied": "लिंक क्लिपबोर्ड में कॉपी हो गया!",
+    "error": "लिंक कॉपी करने में विफल"
+  }
+}

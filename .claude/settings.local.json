@@ -4,7 +4,13 @@
       "Bash(npm install:*)",
       "Bash(npm uninstall:*)",
       "Bash(npm run type-check:*)",
-      "Bash(npm run dev:*)"
+      "Bash(npm run dev:*)",
+      "WebSearch",
+      "Bash(lsof:*)",
+      "Bash(for file in ar.json fr.json tr.json fa.json ur.json hi.json es.json de.json pt.json ja.json zh.json it.json sv.json)",
+      "Bash(do echo \"Processing $file\")",
+      "Bash(done)",
+      "Bash(cat:*)"
     ],
     "deny": [],
     "ask": []

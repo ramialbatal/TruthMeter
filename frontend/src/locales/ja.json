@@ -1,0 +1,95 @@
+{
+  "app": {
+    "title": "TruthMeter",
+    "subtitle": "AI搭載ファクトチェッカー"
+  },
+  "common": {
+    "loading": "読み込み中...",
+    "error": "エラー",
+    "analyzing": "分析中...",
+    "analyzingFromHistory": "履歴から分析中..."
+  },
+  "darkMode": {
+    "toggle": "ダークモード切り替え"
+  },
+  "language": {
+    "select": "言語を選択",
+    "en": "English",
+    "ar": "العربية",
+    "fr": "Français",
+    "tr": "Türkçe",
+    "fa": "فارسی",
+    "ur": "اردو",
+    "hi": "हिन्दी",
+    "es": "Español",
+    "de": "Deutsch",
+    "pt": "Português",
+    "ja": "日本語",
+    "zh": "中文",
+    "it": "Italiano",
+    "sv": "Svenska"
+  },
+  "history": {
+    "title": "履歴",
+    "viewHistory": "履歴を表示",
+    "noHistory": "まだ分析履歴がありません",
+    "clear": "すべてクリア",
+    "confirmClear": "すべての履歴をクリアしてもよろしいですか？",
+    "itemsCount": "{{count}}件"
+  },
+  "input": {
+    "label": "ファクトチェックするコンテンツを貼り付け",
+    "placeholder": "チェックしたいテキストを貼り付けてください...",
+    "button": "コンテンツを分析",
+    "validation": {
+      "required": "コンテンツテキストは必須です",
+      "minLength": "コンテンツは10文字以上である必要があります",
+      "maxLength": "コンテンツは2000文字未満である必要があります"
+    }
+  },
+  "results": {
+    "title": "分析結果",
+    "cached": "キャッシュ済み結果",
+    "percentagesFrom": "{{count}}個のソースから計算されたパーセンテージ",
+    "sourceDistribution": "ソース分布",
+    "accuracy": {
+      "label": "事実の正確性",
+      "outOf": "100点満点",
+      "explanation": "ソースの信頼性と一致に基づく"
+    },
+    "agreement": {
+      "label": "賛同",
+      "sourceCount": "({{total}}個中{{count}}個のソース)",
+      "description": "ソースが賛同"
+    },
+    "disagreement": {
+      "label": "反対",
+      "sourceCount": "({{total}}個中{{count}}個のソース)",
+      "description": "ソースが反対"
+    },
+    "neutral": {
+      "label": "中立",
+      "sourceCount": "({{total}}個中{{count}}個のソース)",
+      "description": "ソースが中立"
+    },
+    "summary": {
+      "title": "要約"
+    },
+    "sources": {
+      "title": "ソース",
+      "supporting": "トップ支持ソースの選択（最大3）",
+      "contradicting": "トップ矛盾ソースの選択（最大3）",
+      "neutral": "トップ中立ソースの選択（最大3）",
+      "noSupporting": "この主張に対する支持ソースが見つかりませんでした。",
+      "noContradicting": "この主張に対する矛盾ソースが見つかりませんでした。",
+      "noNeutral": "この主張に対する中立ソースが見つかりませんでした。"
+    },
+    "analyzedAt": "分析日時: {{date}}"
+  },
+  "share": {
+    "button": "共有",
+    "tooltip": "この分析を共有",
+    "copied": "リンクをクリップボードにコピーしました！",
+    "error": "リンクのコピーに失敗しました"
+  }
+}

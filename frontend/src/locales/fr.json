@@ -1,0 +1,84 @@
+{
+  "app": {
+    "title": "TruthMeter",
+    "subtitle": "Vérificateur de Faits Propulsé par l'IA"
+  },
+  "common": {
+    "loading": "Chargement...",
+    "error": "Erreur",
+    "analyzing": "Analyse en cours...",
+    "analyzingFromHistory": "Analyse depuis l'historique..."
+  },
+  "darkMode": {
+    "toggle": "Basculer en mode sombre"
+  },
+  "language": {
+    "select": "Sélectionner la langue",
+    "en": "English",
+    "ar": "العربية",
+    "fr": "Français"
+  },
+  "history": {
+    "title": "Historique",
+    "viewHistory": "Voir l'historique",
+    "noHistory": "Aucun historique d'analyse pour le moment",
+    "clear": "Tout effacer",
+    "confirmClear": "Êtes-vous sûr de vouloir effacer tout l'historique ?",
+    "itemsCount": "{{count}} éléments"
+  },
+  "input": {
+    "label": "Collez le Contenu à Vérifier",
+    "placeholder": "Collez le texte que vous souhaitez vérifier...",
+    "button": "Analyser le Contenu",
+    "validation": {
+      "required": "Le texte du contenu est requis",
+      "minLength": "Le contenu doit contenir au moins 10 caractères",
+      "maxLength": "Le contenu doit contenir moins de 2000 caractères"
+    }
+  },
+  "results": {
+    "title": "Résultats de l'Analyse",
+    "cached": "Résultat en Cache",
+    "percentagesFrom": "Pourcentages calculés à partir de {{count}} sources",
+    "sourceDistribution": "Distribution des Sources",
+    "accuracy": {
+      "label": "Exactitude Factuelle",
+      "outOf": "sur 100",
+      "explanation": "Basé sur la fiabilité des sources et l'accord"
+    },
+    "agreement": {
+      "label": "Accord",
+      "sourceCount": "({{count}} sur {{total}} sources)",
+      "description": "sources en accord"
+    },
+    "disagreement": {
+      "label": "Désaccord",
+      "sourceCount": "({{count}} sur {{total}} sources)",
+      "description": "sources en désaccord"
+    },
+    "neutral": {
+      "label": "Neutre",
+      "sourceCount": "({{count}} sur {{total}} sources)",
+      "description": "sources neutres"
+    },
+    "summary": {
+      "title": "Résumé"
+    },
+    "sources": {
+      "title": "Sources",
+      "supporting": "Sélection des Meilleures Sources Favorables (max 3)",
+      "contradicting": "Sélection des Meilleures Sources Contradictoires (max 3)",
+      "neutral": "Sélection des Meilleures Sources Neutres (max 3)",
+      "noSupporting": "Aucune source favorable trouvée pour cette affirmation.",
+      "noContradicting": "Aucune source contradictoire trouvée pour cette affirmation.",
+      "noNeutral": "Aucune source neutre trouvée pour cette affirmation."
+    },
+    "analyzedAt": "Analysé le : {{date}}"
+  },
+  "share": {
+    "button": "Partager",
+    "tooltip": "Partager cette analyse",
+    "copied": "Lien copié dans le presse-papiers !",
+    "error": "Échec de la copie du lien"
+  }
+}

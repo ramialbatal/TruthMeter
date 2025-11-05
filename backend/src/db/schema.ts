@@ -33,6 +33,13 @@ export function initializeDatabase(dbPath: string): Database.Database {
     // Column already exists, ignore error
   }
 
+  // Add summary_translations column to existing tables (migration)
+  try {
+    db.exec(`ALTER TABLE analyses ADD COLUMN summary_translations TEXT`)
+  } catch (error) {
+    // Column already exists, ignore error
+  }
+
   // Create index for faster lookups
   db.exec(`
     CREATE INDEX IF NOT EXISTS idx_content_text_normalized

@@ -1,19 +1,24 @@
+import { useTranslation } from 'react-i18next'
+
 interface DarkModeToggleProps {
   isDark: boolean
   onToggle: () => void
 }
 
 export default function DarkModeToggle({ isDark, onToggle }: DarkModeToggleProps) {
+  const { t } = useTranslation()
+
   return (
     <button
       onClick={onToggle}
-      className="fixed top-4 right-4 p-3 rounded-full bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-110 z-50"
-      aria-label="Toggle dark mode"
+      className="p-2 sm:p-3 rounded-full bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 shadow-md hover:shadow-lg transition-all duration-300 hover:scale-110"
+      aria-label={t('darkMode.toggle')}
+      title={t('darkMode.toggle')}
     >
       {isDark ? (
         // Sun icon
         <svg
-          className="w-6 h-6"
+          className="w-5 h-5 sm:w-6 sm:h-6"
           fill="none"
           stroke="currentColor"
           viewBox="0 0 24 24"
@@ -28,7 +33,7 @@ export default function DarkModeToggle({ isDark, onToggle }: DarkModeToggleProps
       ) : (
         // Moon icon
         <svg
-          className="w-6 h-6"
+          className="w-5 h-5 sm:w-6 sm:h-6"
           fill="none"
           stroke="currentColor"
           viewBox="0 0 24 24"

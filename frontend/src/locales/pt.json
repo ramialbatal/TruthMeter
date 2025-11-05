@@ -1,0 +1,95 @@
+{
+  "app": {
+    "title": "TruthMeter",
+    "subtitle": "Verificador de Fatos com IA"
+  },
+  "common": {
+    "loading": "Carregando...",
+    "error": "Erro",
+    "analyzing": "Analisando...",
+    "analyzingFromHistory": "Analisando do histórico..."
+  },
+  "darkMode": {
+    "toggle": "Alternar modo escuro"
+  },
+  "language": {
+    "select": "Selecionar idioma",
+    "en": "English",
+    "ar": "العربية",
+    "fr": "Français",
+    "tr": "Türkçe",
+    "fa": "فارسی",
+    "ur": "اردو",
+    "hi": "हिन्दी",
+    "es": "Español",
+    "de": "Deutsch",
+    "pt": "Português",
+    "ja": "日本語",
+    "zh": "中文",
+    "it": "Italiano",
+    "sv": "Svenska"
+  },
+  "history": {
+    "title": "Histórico",
+    "viewHistory": "Ver histórico",
+    "noHistory": "Ainda não há histórico de análise",
+    "clear": "Limpar Tudo",
+    "confirmClear": "Tem certeza de que deseja limpar todo o histórico?",
+    "itemsCount": "{{count}} itens"
+  },
+  "input": {
+    "label": "Colar Conteúdo para Verificar",
+    "placeholder": "Cole o texto que deseja verificar...",
+    "button": "Analisar Conteúdo",
+    "validation": {
+      "required": "O texto do conteúdo é obrigatório",
+      "minLength": "O conteúdo deve ter pelo menos 10 caracteres",
+      "maxLength": "O conteúdo deve ter menos de 2000 caracteres"
+    }
+  },
+  "results": {
+    "title": "Resultados da Análise",
+    "cached": "Resultado em Cache",
+    "percentagesFrom": "Percentagens calculadas a partir de {{count}} fontes",
+    "sourceDistribution": "Distribuição de Fontes",
+    "accuracy": {
+      "label": "Precisão Factual",
+      "outOf": "de 100",
+      "explanation": "Baseado na confiabilidade da fonte e acordo"
+    },
+    "agreement": {
+      "label": "Concordância",
+      "sourceCount": "({{count}} de {{total}} fontes)",
+      "description": "fontes concordam"
+    },
+    "disagreement": {
+      "label": "Discordância",
+      "sourceCount": "({{count}} de {{total}} fontes)",
+      "description": "fontes discordam"
+    },
+    "neutral": {
+      "label": "Neutro",
+      "sourceCount": "({{count}} de {{total}} fontes)",
+      "description": "fontes neutras"
+    },
+    "summary": {
+      "title": "Resumo"
+    },
+    "sources": {
+      "title": "Fontes",
+      "supporting": "Seleção das Principais Fontes de Apoio (máx 3)",
+      "contradicting": "Seleção das Principais Fontes Contraditórias (máx 3)",
+      "neutral": "Seleção das Principais Fontes Neutras (máx 3)",
+      "noSupporting": "Nenhuma fonte de apoio encontrada para esta afirmação.",
+      "noContradicting": "Nenhuma fonte contraditória encontrada para esta afirmação.",
+      "noNeutral": "Nenhuma fonte neutra encontrada para esta afirmação."
+    },
+    "analyzedAt": "Analisado em: {{date}}"
+  },
+  "share": {
+    "button": "Compartilhar",
+    "tooltip": "Compartilhar esta análise",
+    "copied": "Link copiado para a área de transferência!",
+    "error": "Falha ao copiar o link"
+  }
+}

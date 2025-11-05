@@ -6,6 +6,21 @@ export interface AnalysisResult {
   disagreementScore: number;
   neutralScore: number;
   summary: string;
+  summaryTranslations: {
+    ar?: string;
+    fr?: string;
+    tr?: string;
+    fa?: string;
+    ur?: string;
+    hi?: string;
+    es?: string;
+    de?: string;
+    pt?: string;
+    ja?: string;
+    zh?: string;
+    it?: string;
+    sv?: string;
+  };
   sources: Source[];
   totalSourcesRetrieved: number;
   analyzedAt: string;
@@ -15,9 +30,7 @@ export interface AnalysisResult {
 export interface Source {
   url: string;
   title: string;
-  snippet: string;
   relevance: 'supporting' | 'contradicting' | 'neutral';
-  score: number;
 }
 
 export interface AnalysisRequest {
@@ -29,6 +42,7 @@ export interface TavilySearchResult {
   title: string;
   content: string;
   score: number;
+  published_date?: string;
 }
 
 export interface TavilyResponse {
@@ -41,5 +55,8 @@ export interface ClaudeAnalysis {
   disagreementScore: number;
   neutralScore: number;
   summary: string;
+  summaryTranslations: {
+    [key: string]: string;
+  };
   sources: Source[];
 }

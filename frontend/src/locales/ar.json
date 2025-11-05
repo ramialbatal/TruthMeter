@@ -1,0 +1,84 @@
+{
+  "app": {
+    "title": "مقياس الحقيقة",
+    "subtitle": "مدقق حقائق مدعوم بالذكاء الاصطناعي"
+  },
+  "common": {
+    "loading": "جاري التحميل...",
+    "error": "خطأ",
+    "analyzing": "جاري التحليل...",
+    "analyzingFromHistory": "جاري التحليل من السجل..."
+  },
+  "darkMode": {
+    "toggle": "تبديل الوضع الداكن"
+  },
+  "language": {
+    "select": "اختر اللغة",
+    "en": "English",
+    "ar": "العربية",
+    "fr": "Français"
+  },
+  "history": {
+    "title": "السجل",
+    "viewHistory": "عرض السجل",
+    "noHistory": "لا يوجد سجل تحليل بعد",
+    "clear": "مسح الكل",
+    "confirmClear": "هل أنت متأكد أنك تريد مسح كل السجل؟",
+    "itemsCount": "{{count}} عناصر"
+  },
+  "input": {
+    "label": "الصق المحتوى للتحقق من صحته",
+    "placeholder": "الصق النص الذي تريد التحقق من صحته...",
+    "button": "تحليل المحتوى",
+    "validation": {
+      "required": "نص المحتوى مطلوب",
+      "minLength": "يجب أن يكون المحتوى 10 أحرف على الأقل",
+      "maxLength": "يجب أن يكون المحتوى أقل من 2000 حرف"
+    }
+  },
+  "results": {
+    "title": "نتائج التحليل",
+    "cached": "نتيجة مخزنة مؤقتاً",
+    "percentagesFrom": "النسب المئوية محسوبة من {{count}} مصدر",
+    "sourceDistribution": "توزيع المصادر",
+    "accuracy": {
+      "label": "دقة الحقائق",
+      "outOf": "من 100",
+      "explanation": "بناءً على موثوقية المصادر والتوافق"
+    },
+    "agreement": {
+      "label": "موافق",
+      "sourceCount": "({{count}} من {{total}} مصدر)",
+      "description": "المصادر توافق"
+    },
+    "disagreement": {
+      "label": "مخالف",
+      "sourceCount": "({{count}} من {{total}} مصدر)",
+      "description": "المصادر تخالف"
+    },
+    "neutral": {
+      "label": "محايد",
+      "sourceCount": "({{count}} من {{total}} مصدر)",
+      "description": "المصادر محايدة"
+    },
+    "summary": {
+      "title": "الملخص"
+    },
+    "sources": {
+      "title": "المصادر",
+      "supporting": "مجموعة من أفضل المصادر المؤيدة (الحد الأقصى 3)",
+      "contradicting": "مجموعة من أفضل المصادر المعارضة (الحد الأقصى 3)",
+      "neutral": "مجموعة من أفضل المصادر المحايدة (الحد الأقصى 3)",
+      "noSupporting": "لم يتم العثور على مصادر مؤيدة لهذا الادعاء.",
+      "noContradicting": "لم يتم العثور على مصادر معارضة لهذا الادعاء.",
+      "noNeutral": "لم يتم العثور على مصادر محايدة لهذا الادعاء."
+    },
+    "analyzedAt": "تم التحليل في: {{date}}"
+  },
+  "share": {
+    "button": "مشاركة",
+    "tooltip": "مشاركة هذا التحليل",
+    "copied": "تم نسخ الرابط إلى الحافظة!",
+    "error": "فشل نسخ الرابط"
+  }
+}

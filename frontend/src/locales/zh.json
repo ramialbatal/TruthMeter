@@ -1,0 +1,95 @@
+{
+  "app": {
+    "title": "TruthMeter",
+    "subtitle": "AI驱动的事实核查工具"
+  },
+  "common": {
+    "loading": "加载中...",
+    "error": "错误",
+    "analyzing": "分析中...",
+    "analyzingFromHistory": "从历史记录分析中..."
+  },
+  "darkMode": {
+    "toggle": "切换深色模式"
+  },
+  "language": {
+    "select": "选择语言",
+    "en": "English",
+    "ar": "العربية",
+    "fr": "Français",
+    "tr": "Türkçe",
+    "fa": "فارسی",
+    "ur": "اردو",
+    "hi": "हिन्दी",
+    "es": "Español",
+    "de": "Deutsch",
+    "pt": "Português",
+    "ja": "日本語",
+    "zh": "中文",
+    "it": "Italiano",
+    "sv": "Svenska"
+  },
+  "history": {
+    "title": "历史",
+    "viewHistory": "查看历史",
+    "noHistory": "还没有分析历史",
+    "clear": "全部清除",
+    "confirmClear": "您确定要清除所有历史记录吗？",
+    "itemsCount": "{{count}}项"
+  },
+  "input": {
+    "label": "粘贴要进行事实核查的内容",
+    "placeholder": "粘贴您要核查的文本...",
+    "button": "分析内容",
+    "validation": {
+      "required": "内容文本必填",
+      "minLength": "内容必须至少10个字符",
+      "maxLength": "内容必须少于2000个字符"
+    }
+  },
+  "results": {
+    "title": "分析结果",
+    "cached": "缓存结果",
+    "percentagesFrom": "百分比从{{count}}个来源计算",
+    "sourceDistribution": "来源分布",
+    "accuracy": {
+      "label": "事实准确性",
+      "outOf": "满分100",
+      "explanation": "基于来源可靠性和一致性"
+    },
+    "agreement": {
+      "label": "同意",
+      "sourceCount": "({{total}}个来源中的{{count}}个)",
+      "description": "来源同意"
+    },
+    "disagreement": {
+      "label": "不同意",
+      "sourceCount": "({{total}}个来源中的{{count}}个)",
+      "description": "来源不同意"
+    },
+    "neutral": {
+      "label": "中立",
+      "sourceCount": "({{total}}个来源中的{{count}}个)",
+      "description": "来源中立"
+    },
+    "summary": {
+      "title": "摘要"
+    },
+    "sources": {
+      "title": "来源",
+      "supporting": "顶级支持来源选择（最多3个）",
+      "contradicting": "顶级矛盾来源选择（最多3个）",
+      "neutral": "顶级中立来源选择（最多3个）",
+      "noSupporting": "未找到支持此声明的来源。",
+      "noContradicting": "未找到与此声明矛盾的来源。",
+      "noNeutral": "未找到此声明的中立来源。"
+    },
+    "analyzedAt": "分析于：{{date}}"
+  },
+  "share": {
+    "button": "分享",
+    "tooltip": "分享此分析",
+    "copied": "链接已复制到剪贴板！",
+    "error": "复制链接失败"
+  }
+}

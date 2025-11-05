@@ -1,0 +1,95 @@
+{
+  "app": {
+    "title": "TruthMeter",
+    "subtitle": "Verificatore di Fatti con IA"
+  },
+  "common": {
+    "loading": "Caricamento...",
+    "error": "Errore",
+    "analyzing": "Analisi in corso...",
+    "analyzingFromHistory": "Analisi dalla cronologia..."
+  },
+  "darkMode": {
+    "toggle": "Attiva/Disattiva modalità scura"
+  },
+  "language": {
+    "select": "Seleziona lingua",
+    "en": "English",
+    "ar": "العربية",
+    "fr": "Français",
+    "tr": "Türkçe",
+    "fa": "فارسی",
+    "ur": "اردو",
+    "hi": "हिन्दी",
+    "es": "Español",
+    "de": "Deutsch",
+    "pt": "Português",
+    "ja": "日本語",
+    "zh": "中文",
+    "it": "Italiano",
+    "sv": "Svenska"
+  },
+  "history": {
+    "title": "Cronologia",
+    "viewHistory": "Visualizza cronologia",
+    "noHistory": "Nessuna cronologia di analisi ancora",
+    "clear": "Cancella Tutto",
+    "confirmClear": "Sei sicuro di voler cancellare tutta la cronologia?",
+    "itemsCount": "{{count}} elementi"
+  },
+  "input": {
+    "label": "Incolla Contenuto da Verificare",
+    "placeholder": "Incolla il testo che vuoi verificare...",
+    "button": "Analizza Contenuto",
+    "validation": {
+      "required": "Il testo del contenuto è obbligatorio",
+      "minLength": "Il contenuto deve contenere almeno 10 caratteri",
+      "maxLength": "Il contenuto deve contenere meno di 2000 caratteri"
+    }
+  },
+  "results": {
+    "title": "Risultati dell'Analisi",
+    "cached": "Risultato in Cache",
+    "percentagesFrom": "Percentuali calcolate da {{count}} fonti",
+    "sourceDistribution": "Distribuzione delle Fonti",
+    "accuracy": {
+      "label": "Accuratezza Fattuale",
+      "outOf": "su 100",
+      "explanation": "Basato sull'affidabilità delle fonti e l'accordo"
+    },
+    "agreement": {
+      "label": "Accordo",
+      "sourceCount": "({{count}} su {{total}} fonti)",
+      "description": "fonti concordano"
+    },
+    "disagreement": {
+      "label": "Disaccordo",
+      "sourceCount": "({{count}} su {{total}} fonti)",
+      "description": "fonti in disaccordo"
+    },
+    "neutral": {
+      "label": "Neutrale",
+      "sourceCount": "({{count}} su {{total}} fonti)",
+      "description": "fonti neutrali"
+    },
+    "summary": {
+      "title": "Riepilogo"
+    },
+    "sources": {
+      "title": "Fonti",
+      "supporting": "Selezione delle Principali Fonti di Supporto (max 3)",
+      "contradicting": "Selezione delle Principali Fonti Contraddittorie (max 3)",
+      "neutral": "Selezione delle Principali Fonti Neutrali (max 3)",
+      "noSupporting": "Nessuna fonte di supporto trovata per questa affermazione.",
+      "noContradicting": "Nessuna fonte contraddittoria trovata per questa affermazione.",
+      "noNeutral": "Nessuna fonte neutrale trovata per questa affermazione."
+    },
+    "analyzedAt": "Analizzato il: {{date}}"
+  },
+  "share": {
+    "button": "Condividi",
+    "tooltip": "Condividi questa analisi",
+    "copied": "Link copiato negli appunti!",
+    "error": "Impossibile copiare il link"
+  }
+}

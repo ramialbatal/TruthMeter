@@ -1,0 +1,84 @@
+{
+  "app": {
+    "title": "TruthMeter",
+    "subtitle": "AI-Powered Fact Checker"
+  },
+  "common": {
+    "loading": "Loading...",
+    "error": "Error",
+    "analyzing": "Analyzing...",
+    "analyzingFromHistory": "Analyzing from history..."
+  },
+  "darkMode": {
+    "toggle": "Toggle dark mode"
+  },
+  "language": {
+    "select": "Select language",
+    "en": "English",
+    "ar": "Arabic",
+    "fr": "French"
+  },
+  "history": {
+    "title": "History",
+    "viewHistory": "View history",
+    "noHistory": "No analysis history yet",
+    "clear": "Clear All",
+    "confirmClear": "Are you sure you want to clear all history?",
+    "itemsCount": "{{count}} items"
+  },
+  "input": {
+    "label": "Paste Content to Fact-Check",
+    "placeholder": "Paste the text content you want to fact-check...",
+    "button": "Analyze Content",
+    "validation": {
+      "required": "Content text is required",
+      "minLength": "Content must be at least 10 characters",
+      "maxLength": "Content must be less than 2000 characters"
+    }
+  },
+  "results": {
+    "title": "Analysis Results",
+    "cached": "Cached Result",
+    "percentagesFrom": "Percentages calculated from {{count}} sources",
+    "sourceDistribution": "Source Distribution",
+    "accuracy": {
+      "label": "Factual Accuracy",
+      "outOf": "out of 100",
+      "explanation": "Based on source reliability and agreement"
+    },
+    "agreement": {
+      "label": "Agreement",
+      "sourceCount": "({{count}} out of {{total}} sources)",
+      "description": "sources agree"
+    },
+    "disagreement": {
+      "label": "Disagreement",
+      "sourceCount": "({{count}} out of {{total}} sources)",
+      "description": "sources disagree"
+    },
+    "neutral": {
+      "label": "Neutral",
+      "sourceCount": "({{count}} out of {{total}} sources)",
+      "description": "sources neutral"
+    },
+    "summary": {
+      "title": "Summary"
+    },
+    "sources": {
+      "title": "Sources",
+      "supporting": "Supporting Sources (up to 10)",
+      "contradicting": "Contradicting Sources (up to 10)",
+      "neutral": "Neutral Sources (up to 10)",
+      "noSupporting": "No supporting sources found for this claim.",
+      "noContradicting": "No contradicting sources found for this claim.",
+      "noNeutral": "No neutral sources found for this claim."
+    },
+    "analyzedAt": "Analyzed at: {{date}}"
+  },
+  "share": {
+    "button": "Share",
+    "tooltip": "Share this analysis",
+    "copied": "Link copied to clipboard!",
+    "error": "Failed to copy link"
+  }
+}

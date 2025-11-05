@@ -1,0 +1,95 @@
+{
+  "app": {
+    "title": "TruthMeter",
+    "subtitle": "Yapay Zeka Destekli Gerçek Kontrolcüsü"
+  },
+  "common": {
+    "loading": "Yükleniyor...",
+    "error": "Hata",
+    "analyzing": "Analiz ediliyor...",
+    "analyzingFromHistory": "Geçmişten analiz ediliyor..."
+  },
+  "darkMode": {
+    "toggle": "Karanlık modu aç/kapat"
+  },
+  "language": {
+    "select": "Dil seçin",
+    "en": "English",
+    "ar": "العربية",
+    "fr": "Français",
+    "tr": "Türkçe",
+    "fa": "فارسی",
+    "ur": "اردو",
+    "hi": "हिन्दी",
+    "es": "Español",
+    "de": "Deutsch",
+    "pt": "Português",
+    "ja": "日本語",
+    "zh": "中文",
+    "it": "Italiano",
+    "sv": "Svenska"
+  },
+  "history": {
+    "title": "Geçmiş",
+    "viewHistory": "Geçmişi görüntüle",
+    "noHistory": "Henüz analiz geçmişi yok",
+    "clear": "Tümünü Temizle",
+    "confirmClear": "Tüm geçmişi silmek istediğinizden emin misiniz?",
+    "itemsCount": "{{count}} öğe"
+  },
+  "input": {
+    "label": "Doğrulanacak İçeriği Yapıştırın",
+    "placeholder": "Doğrulamak istediğiniz metni yapıştırın...",
+    "button": "İçeriği Analiz Et",
+    "validation": {
+      "required": "İçerik metni gereklidir",
+      "minLength": "İçerik en az 10 karakter olmalıdır",
+      "maxLength": "İçerik 2000 karakterden az olmalıdır"
+    }
+  },
+  "results": {
+    "title": "Analiz Sonuçları",
+    "cached": "Önbelleğe Alınmış Sonuç",
+    "percentagesFrom": "Yüzdeler {{count}} kaynaktan hesaplandı",
+    "sourceDistribution": "Kaynak Dağılımı",
+    "accuracy": {
+      "label": "Gerçeklik Doğruluğu",
+      "outOf": "100 üzerinden",
+      "explanation": "Kaynak güvenilirliği ve uyuma dayanarak"
+    },
+    "agreement": {
+      "label": "Onaylayan",
+      "sourceCount": "({{total}} kaynaktan {{count}})",
+      "description": "kaynak onaylıyor"
+    },
+    "disagreement": {
+      "label": "Karşı Çıkan",
+      "sourceCount": "({{total}} kaynaktan {{count}})",
+      "description": "kaynak karşı çıkıyor"
+    },
+    "neutral": {
+      "label": "Tarafsız",
+      "sourceCount": "({{total}} kaynaktan {{count}})",
+      "description": "kaynak tarafsız"
+    },
+    "summary": {
+      "title": "Özet"
+    },
+    "sources": {
+      "title": "Kaynaklar",
+      "supporting": "En İyi Destekleyici Kaynaklar Seçimi (maks 3)",
+      "contradicting": "En İyi Karşıt Kaynaklar Seçimi (maks 3)",
+      "neutral": "En İyi Tarafsız Kaynaklar Seçimi (maks 3)",
+      "noSupporting": "Bu iddia için destekleyici kaynak bulunamadı.",
+      "noContradicting": "Bu iddia için karşıt kaynak bulunamadı.",
+      "noNeutral": "Bu iddia için tarafsız kaynak bulunamadı."
+    },
+    "analyzedAt": "Analiz tarihi: {{date}}"
+  },
+  "share": {
+    "button": "Paylaş",
+    "tooltip": "Bu analizi paylaş",
+    "copied": "Bağlantı panoya kopyalandı!",
+    "error": "Bağlantı kopyalanamadı"
+  }
+}

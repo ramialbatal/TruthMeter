@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import { useTranslation } from 'react-i18next'
 import { HistoryItem } from '../hooks/useHistory'
 
 interface HistorySidebarProps {
@@ -18,6 +19,7 @@ export default function HistorySidebar({
   onClear,
   onRemove,
 }: HistorySidebarProps) {
+  const { t } = useTranslation()
   const [isAnimating, setIsAnimating] = useState(false)
   const [shouldRender, setShouldRender] = useState(isOpen)
 
@@ -69,12 +71,12 @@ export default function HistorySidebar({
               <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
               </svg>
-              History
+              {t('history.title')}
             </h2>
             <button
               onClick={onClose}
               className="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
-              aria-label="Close history"
+              aria-label={t('history.viewHistory')}
             >
               <svg className="w-6 h-6 text-gray-600 dark:text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
@@ -88,7 +90,7 @@ export default function HistorySidebar({
               onClick={onClear}
               className="w-full mb-4 px-4 py-2 text-sm text-red-600 dark:text-red-400 border border-red-300 dark:border-red-700 rounded-lg hover:bg-red-50 dark:hover:bg-red-900/20 transition-colors"
             >
-              Clear All History
+              {t('history.clear')}
             </button>
           )}
 
@@ -98,10 +100,7 @@ export default function HistorySidebar({
               <svg className="w-16 h-16 mx-auto text-gray-400 dark:text-gray-600 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
               </svg>
-              <p className="text-gray-500 dark:text-gray-400">No history yet</p>
-              <p className="text-sm text-gray-400 dark:text-gray-500 mt-2">
-                Analyzed content will appear here
-              </p>
+              <p className="text-gray-500 dark:text-gray-400">{t('history.noHistory')}</p>
             </div>
           ) : (
             <div className="space-y-3">

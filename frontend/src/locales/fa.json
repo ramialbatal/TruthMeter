@@ -1,0 +1,95 @@
+{
+  "app": {
+    "title": "TruthMeter",
+    "subtitle": "بررسی‌کننده واقعیت با هوش مصنوعی"
+  },
+  "common": {
+    "loading": "در حال بارگذاری...",
+    "error": "خطا",
+    "analyzing": "در حال تحلیل...",
+    "analyzingFromHistory": "تحلیل از تاریخچه..."
+  },
+  "darkMode": {
+    "toggle": "تغییر حالت تاریک"
+  },
+  "language": {
+    "select": "انتخاب زبان",
+    "en": "English",
+    "ar": "العربية",
+    "fr": "Français",
+    "tr": "Türkçe",
+    "fa": "فارسی",
+    "ur": "اردو",
+    "hi": "हिन्दी",
+    "es": "Español",
+    "de": "Deutsch",
+    "pt": "Português",
+    "ja": "日本語",
+    "zh": "中文",
+    "it": "Italiano",
+    "sv": "Svenska"
+  },
+  "history": {
+    "title": "تاریخچه",
+    "viewHistory": "نمایش تاریخچه",
+    "noHistory": "هنوز تاریخچه تحلیلی وجود ندارد",
+    "clear": "پاک کردن همه",
+    "confirmClear": "آیا مطمئن هستید که می‌خواهید همه تاریخچه را پاک کنید؟",
+    "itemsCount": "{{count}} مورد"
+  },
+  "input": {
+    "label": "محتوا را برای بررسی واقعیت بچسبانید",
+    "placeholder": "متنی را که می‌خواهید بررسی کنید بچسبانید...",
+    "button": "تحلیل محتوا",
+    "validation": {
+      "required": "متن محتوا الزامی است",
+      "minLength": "محتوا باید حداقل 10 کاراکتر باشد",
+      "maxLength": "محتوا باید کمتر از 2000 کاراکتر باشد"
+    }
+  },
+  "results": {
+    "title": "نتایج تحلیل",
+    "cached": "نتیجه ذخیره شده",
+    "percentagesFrom": "درصدها از {{count}} منبع محاسبه شده‌اند",
+    "sourceDistribution": "توزیع منابع",
+    "accuracy": {
+      "label": "دقت واقعی",
+      "outOf": "از 100",
+      "explanation": "بر اساس قابلیت اطمینان منابع و توافق"
+    },
+    "agreement": {
+      "label": "موافق",
+      "sourceCount": "({{count}} از {{total}} منبع)",
+      "description": "منابع موافق"
+    },
+    "disagreement": {
+      "label": "مخالف",
+      "sourceCount": "({{count}} از {{total}} منبع)",
+      "description": "منابع مخالف"
+    },
+    "neutral": {
+      "label": "خنثی",
+      "sourceCount": "({{count}} از {{total}} منبع)",
+      "description": "منابع خنثی"
+    },
+    "summary": {
+      "title": "خلاصه"
+    },
+    "sources": {
+      "title": "منابع",
+      "supporting": "انتخاب منابع حمایت‌کننده برتر (حداکثر 3)",
+      "contradicting": "انتخاب منابع متناقض برتر (حداکثر 3)",
+      "neutral": "انتخاب منابع خنثی برتر (حداکثر 3)",
+      "noSupporting": "هیچ منبع حمایت‌کننده‌ای برای این ادعا یافت نشد.",
+      "noContradicting": "هیچ منبع متناقضی برای این ادعا یافت نشد.",
+      "noNeutral": "هیچ منبع خنثی برای این ادعا یافت نشد."
+    },
+    "analyzedAt": "تحلیل شده در: {{date}}"
+  },
+  "share": {
+    "button": "اشتراک‌گذاری",
+    "tooltip": "این تحلیل را به اشتراک بگذارید",
+    "copied": "لینک در کلیپ‌بورد کپی شد!",
+    "error": "کپی لینک ناموفق بود"
+  }
+}

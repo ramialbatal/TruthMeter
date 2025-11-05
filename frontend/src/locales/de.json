@@ -1,0 +1,95 @@
+{
+  "app": {
+    "title": "TruthMeter",
+    "subtitle": "KI-gestützter Faktenprüfer"
+  },
+  "common": {
+    "loading": "Laden...",
+    "error": "Fehler",
+    "analyzing": "Analysieren...",
+    "analyzingFromHistory": "Aus Verlauf analysieren..."
+  },
+  "darkMode": {
+    "toggle": "Dunkelmodus umschalten"
+  },
+  "language": {
+    "select": "Sprache wählen",
+    "en": "English",
+    "ar": "العربية",
+    "fr": "Français",
+    "tr": "Türkçe",
+    "fa": "فارسی",
+    "ur": "اردو",
+    "hi": "हिन्दी",
+    "es": "Español",
+    "de": "Deutsch",
+    "pt": "Português",
+    "ja": "日本語",
+    "zh": "中文",
+    "it": "Italiano",
+    "sv": "Svenska"
+  },
+  "history": {
+    "title": "Verlauf",
+    "viewHistory": "Verlauf anzeigen",
+    "noHistory": "Noch kein Analyseverlauf",
+    "clear": "Alles Löschen",
+    "confirmClear": "Sind Sie sicher, dass Sie den gesamten Verlauf löschen möchten?",
+    "itemsCount": "{{count}} Elemente"
+  },
+  "input": {
+    "label": "Inhalt zum Faktencheck Einfügen",
+    "placeholder": "Fügen Sie den zu überprüfenden Text ein...",
+    "button": "Inhalt Analysieren",
+    "validation": {
+      "required": "Inhaltstext ist erforderlich",
+      "minLength": "Inhalt muss mindestens 10 Zeichen lang sein",
+      "maxLength": "Inhalt muss weniger als 2000 Zeichen lang sein"
+    }
+  },
+  "results": {
+    "title": "Analyseergebnisse",
+    "cached": "Zwischengespeichertes Ergebnis",
+    "percentagesFrom": "Prozentsätze aus {{count}} Quellen berechnet",
+    "sourceDistribution": "Quellenverteilung",
+    "accuracy": {
+      "label": "Faktische Genauigkeit",
+      "outOf": "von 100",
+      "explanation": "Basierend auf Quellenzuverlässigkeit und Übereinstimmung"
+    },
+    "agreement": {
+      "label": "Zustimmung",
+      "sourceCount": "({{count}} von {{total}} Quellen)",
+      "description": "Quellen stimmen zu"
+    },
+    "disagreement": {
+      "label": "Ablehnung",
+      "sourceCount": "({{count}} von {{total}} Quellen)",
+      "description": "Quellen lehnen ab"
+    },
+    "neutral": {
+      "label": "Neutral",
+      "sourceCount": "({{count}} von {{total}} Quellen)",
+      "description": "Quellen neutral"
+    },
+    "summary": {
+      "title": "Zusammenfassung"
+    },
+    "sources": {
+      "title": "Quellen",
+      "supporting": "Auswahl der wichtigsten unterstützenden Quellen (max 3)",
+      "contradicting": "Auswahl der wichtigsten widersprüchlichen Quellen (max 3)",
+      "neutral": "Auswahl der wichtigsten neutralen Quellen (max 3)",
+      "noSupporting": "Keine unterstützenden Quellen für diese Behauptung gefunden.",
+      "noContradicting": "Keine widersprüchlichen Quellen für diese Behauptung gefunden.",
+      "noNeutral": "Keine neutralen Quellen für diese Behauptung gefunden."
+    },
+    "analyzedAt": "Analysiert am: {{date}}"
+  },
+  "share": {
+    "button": "Teilen",
+    "tooltip": "Diese Analyse teilen",
+    "copied": "Link in die Zwischenablage kopiert!",
+    "error": "Fehler beim Kopieren des Links"
+  }
+}

@@ -1,0 +1,95 @@
+{
+  "app": {
+    "title": "TruthMeter",
+    "subtitle": "AI-driven Faktakontrollant"
+  },
+  "common": {
+    "loading": "Laddar...",
+    "error": "Fel",
+    "analyzing": "Analyserar...",
+    "analyzingFromHistory": "Analyserar från historik..."
+  },
+  "darkMode": {
+    "toggle": "Växla mörkt läge"
+  },
+  "language": {
+    "select": "Välj språk",
+    "en": "English",
+    "ar": "العربية",
+    "fr": "Français",
+    "tr": "Türkçe",
+    "fa": "فارسی",
+    "ur": "اردو",
+    "hi": "हिन्दी",
+    "es": "Español",
+    "de": "Deutsch",
+    "pt": "Português",
+    "ja": "日本語",
+    "zh": "中文",
+    "it": "Italiano",
+    "sv": "Svenska"
+  },
+  "history": {
+    "title": "Historik",
+    "viewHistory": "Visa historik",
+    "noHistory": "Ingen analyshistorik än",
+    "clear": "Rensa Allt",
+    "confirmClear": "Är du säker på att du vill rensa all historik?",
+    "itemsCount": "{{count}} objekt"
+  },
+  "input": {
+    "label": "Klistra in Innehåll för Faktakontroll",
+    "placeholder": "Klistra in texten du vill faktakontrollera...",
+    "button": "Analysera Innehåll",
+    "validation": {
+      "required": "Innehållstext krävs",
+      "minLength": "Innehållet måste vara minst 10 tecken",
+      "maxLength": "Innehållet måste vara mindre än 2000 tecken"
+    }
+  },
+  "results": {
+    "title": "Analysresultat",
+    "cached": "Cachad Resultat",
+    "percentagesFrom": "Procentsatser beräknade från {{count}} källor",
+    "sourceDistribution": "Källfördelning",
+    "accuracy": {
+      "label": "Faktisk Noggrannhet",
+      "outOf": "av 100",
+      "explanation": "Baserat på källtillförlitlighet och överensstämmelse"
+    },
+    "agreement": {
+      "label": "Överensstämmelse",
+      "sourceCount": "({{count}} av {{total}} källor)",
+      "description": "källor överensstämmer"
+    },
+    "disagreement": {
+      "label": "Oenighet",
+      "sourceCount": "({{count}} av {{total}} källor)",
+      "description": "källor är oense"
+    },
+    "neutral": {
+      "label": "Neutral",
+      "sourceCount": "({{count}} av {{total}} källor)",
+      "description": "källor neutrala"
+    },
+    "summary": {
+      "title": "Sammanfattning"
+    },
+    "sources": {
+      "title": "Källor",
+      "supporting": "Urval av Främsta Stödjande Källor (max 3)",
+      "contradicting": "Urval av Främsta Motsägande Källor (max 3)",
+      "neutral": "Urval av Främsta Neutrala Källor (max 3)",
+      "noSupporting": "Inga stödjande källor hittades för detta påstående.",
+      "noContradicting": "Inga motsägande källor hittades för detta påstående.",
+      "noNeutral": "Inga neutrala källor hittades för detta påstående."
+    },
+    "analyzedAt": "Analyserad: {{date}}"
+  },
+  "share": {
+    "button": "Dela",
+    "tooltip": "Dela denna analys",
+    "copied": "Länk kopierad till urklipp!",
+    "error": "Misslyckades med att kopiera länk"
+  }
+}

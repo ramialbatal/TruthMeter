@@ -1,0 +1,95 @@
+{
+  "app": {
+    "title": "TruthMeter",
+    "subtitle": "AI سے چلنے والا حقائق جانچنے والا"
+  },
+  "common": {
+    "loading": "لوڈ ہو رہا ہے...",
+    "error": "خرابی",
+    "analyzing": "تجزیہ ہو رہا ہے...",
+    "analyzingFromHistory": "سابقہ سے تجزیہ ہو رہا ہے..."
+  },
+  "darkMode": {
+    "toggle": "ڈارک موڈ تبدیل کریں"
+  },
+  "language": {
+    "select": "زبان منتخب کریں",
+    "en": "English",
+    "ar": "العربية",
+    "fr": "Français",
+    "tr": "Türkçe",
+    "fa": "فارسی",
+    "ur": "اردو",
+    "hi": "हिन्दी",
+    "es": "Español",
+    "de": "Deutsch",
+    "pt": "Português",
+    "ja": "日本語",
+    "zh": "中文",
+    "it": "Italiano",
+    "sv": "Svenska"
+  },
+  "history": {
+    "title": "سابقہ",
+    "viewHistory": "سابقہ دیکھیں",
+    "noHistory": "ابھی تک تجزیے کا کوئی سابقہ نہیں",
+    "clear": "سب صاف کریں",
+    "confirmClear": "کیا آپ واقعی تمام سابقہ صاف کرنا چاہتے ہیں؟",
+    "itemsCount": "{{count}} اشیاء"
+  },
+  "input": {
+    "label": "حقائق جانچنے کے لیے مواد چسپاں کریں",
+    "placeholder": "وہ متن چسپاں کریں جسے آپ جانچنا چاہتے ہیں...",
+    "button": "مواد کا تجزیہ کریں",
+    "validation": {
+      "required": "مواد کا متن ضروری ہے",
+      "minLength": "مواد کم از کم 10 حروف کا ہونا چاہیے",
+      "maxLength": "مواد 2000 حروف سے کم ہونا چاہیے"
+    }
+  },
+  "results": {
+    "title": "تجزیے کے نتائج",
+    "cached": "محفوظ شدہ نتیجہ",
+    "percentagesFrom": "فیصد {{count}} ذرائع سے شمار کیے گئے",
+    "sourceDistribution": "ذرائع کی تقسیم",
+    "accuracy": {
+      "label": "حقائق کی درستگی",
+      "outOf": "100 میں سے",
+      "explanation": "ذرائع کی وشوسنییتا اور اتفاق کی بنیاد پر"
+    },
+    "agreement": {
+      "label": "اتفاق",
+      "sourceCount": "({{total}} میں سے {{count}} ذرائع)",
+      "description": "ذرائع متفق ہیں"
+    },
+    "disagreement": {
+      "label": "اختلاف",
+      "sourceCount": "({{total}} میں سے {{count}} ذرائع)",
+      "description": "ذرائع مخالف ہیں"
+    },
+    "neutral": {
+      "label": "غیر جانبدار",
+      "sourceCount": "({{total}} میں سے {{count}} ذرائع)",
+      "description": "ذرائع غیر جانبدار"
+    },
+    "summary": {
+      "title": "خلاصہ"
+    },
+    "sources": {
+      "title": "ذرائع",
+      "supporting": "اعلیٰ معاون ذرائع کا انتخاب (زیادہ سے زیادہ 3)",
+      "contradicting": "اعلیٰ متضاد ذرائع کا انتخاب (زیادہ سے زیادہ 3)",
+      "neutral": "اعلیٰ غیر جانبدار ذرائع کا انتخاب (زیادہ سے زیادہ 3)",
+      "noSupporting": "اس دعوے کے لیے کوئی معاون ذرائع نہیں ملے۔",
+      "noContradicting": "اس دعوے کے لیے کوئی متضاد ذرائع نہیں ملے۔",
+      "noNeutral": "اس دعوے کے لیے کوئی غیر جانبدار ذرائع نہیں ملے۔"
+    },
+    "analyzedAt": "تجزیہ کیا گیا: {{date}}"
+  },
+  "share": {
+    "button": "شیئر کریں",
+    "tooltip": "اس تجزیے کو شیئر کریں",
+    "copied": "لنک کلپ بورڈ میں کاپی ہو گیا!",
+    "error": "لنک کاپی کرنے میں ناکام"
+  }
+}
