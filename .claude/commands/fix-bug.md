@@ -281,7 +281,7 @@ Offer to create tests to prevent regression:
 describe('FactCheckerService', () => {
   it('should handle empty content text', async () => {
     await expect(
-      factChecker.analyzePost('')
+      factChecker.analyzeContent('')
     ).rejects.toThrow('Content text is required')
   })
 })
