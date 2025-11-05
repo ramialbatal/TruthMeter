@@ -11,6 +11,42 @@ export class OpenAIService {
     this.client = new OpenAI({ apiKey })
   }
 
+  /**
+   * Normalize percentages to ensure they sum to exactly 100% with one decimal place
+   */
+  private normalizePercentages(agreement: number, disagreement: number, neutral: number): {
+    agreementScore: number
+    disagreementScore: number
+    neutralScore: number
+  } {
+    // Round to one decimal place
+    let total = agreement + disagreement + neutral
+
+    // Calculate percentages that sum to 100
+    let agreementScore = parseFloat(((agreement / total) * 100).toFixed(1))
+    let disagreementScore = parseFloat(((disagreement / total) * 100).toFixed(1))
+    let neutralScore = parseFloat(((neutral / total) * 100).toFixed(1))
+
+    // Check if they sum to 100
+    let sum = agreementScore + disagreementScore + neutralScore
+
+    // Adjust the largest value to make the sum exactly 100
+    if (sum !== 100) {
+      const diff = parseFloat((100 - sum).toFixed(1))
+
+      // Find the largest score and adjust it
+      if (agreementScore >= disagreementScore && agreementScore >= neutralScore) {
+        agreementScore = parseFloat((agreementScore + diff).toFixed(1))
+      } else if (disagreementScore >= agreementScore && disagreementScore >= neutralScore) {
+        disagreementScore = parseFloat((disagreementScore + diff).toFixed(1))
+      } else {
+        neutralScore = parseFloat((neutralScore + diff).toFixed(1))
+      }
+    }
+
+    return { agreementScore, disagreementScore, neutralScore }
+  }
+
   async analyzeFactCheck(
     contentText: string,
     sources: TavilySearchResult[]
@@ -54,10 +90,11 @@ Please analyze the content and provide your response in the following JSON forma
 
 Guidelines:
 - accuracyScore: 0-100, where 100 means completely accurate, 0 means completely false
-- agreementScore: (number of supporting sources / total sources) × 100
-- disagreementScore: (number of contradicting sources / total sources) × 100
-- neutralScore: (number of neutral sources / total sources) × 100
+- agreementScore: (number of supporting sources / total sources) × 100 (use decimal precision)
+- disagreementScore: (number of contradicting sources / total sources) × 100 (use decimal precision)
+- neutralScore: (number of neutral sources / total sources) × 100 (use decimal precision)
 - IMPORTANT: agreementScore + disagreementScore + neutralScore must equal 100
+- Use floating point numbers with decimal precision for all percentage scores
 - summary: Brief explanation of your findings (2-3 sentences)
 - sources: List each source with its relevance to the claim (supporting/contradicting/neutral)
 - Only include sources that are relevant to the claim
@@ -102,7 +139,23 @@ Respond with ONLY the JSON object, no additional text.`
         throw new Error('Invalid response format from OpenAI')
       }
 
-      return analysis
+      // Normalize percentages to ensure they sum to exactly 100% with one decimal place
+      const normalized = this.normalizePercentages(
+        analysis.agreementScore,
+        analysis.disagreementScore,
+        analysis.neutralScore
+      )
+
+      // Round accuracy score to one decimal place
+      const accuracyScore = parseFloat(analysis.accuracyScore.toFixed(1))
+
+      return {
+        ...analysis,
+        accuracyScore,
+        agreementScore: normalized.agreementScore,
+        disagreementScore: normalized.disagreementScore,
+        neutralScore: normalized.neutralScore,
+      }
     } catch (error) {
       console.error('OpenAI analysis error:', error)
       if (error instanceof Error && error.message.includes('JSON')) {

@@ -74,26 +74,26 @@ export default function ResultsDashboard({ result }: ResultsDashboardProps) {
         <div className={`${getScoreBgColor(result.accuracyScore)} dark:bg-opacity-20 rounded-xl p-4 sm:p-6 transform hover:scale-105 transition-all duration-300 animate-fade-in`}>
           <p className="text-xs sm:text-sm font-medium text-gray-600 dark:text-gray-400 mb-2">Factual Accuracy</p>
           <p className={`text-3xl sm:text-4xl font-bold ${getScoreColor(result.accuracyScore)}`}>
-            {result.accuracyScore}
+            {result.accuracyScore.toFixed(1)}
           </p>
           <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">out of 100</p>
         </div>
 
         <div className="bg-blue-50 dark:bg-blue-900/20 rounded-xl p-4 sm:p-6 transform hover:scale-105 transition-all duration-300 animate-fade-in" style={{ animationDelay: '0.1s' }}>
           <p className="text-xs sm:text-sm font-medium text-gray-600 dark:text-gray-400 mb-2">Agreement</p>
-          <p className="text-3xl sm:text-4xl font-bold text-blue-600 dark:text-blue-400">{result.agreementScore}%</p>
+          <p className="text-3xl sm:text-4xl font-bold text-blue-600 dark:text-blue-400">{result.agreementScore.toFixed(1)}%</p>
           <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">sources agree</p>
         </div>
 
         <div className="bg-orange-50 dark:bg-orange-900/20 rounded-xl p-4 sm:p-6 transform hover:scale-105 transition-all duration-300 animate-fade-in" style={{ animationDelay: '0.2s' }}>
           <p className="text-xs sm:text-sm font-medium text-gray-600 dark:text-gray-400 mb-2">Disagreement</p>
-          <p className="text-3xl sm:text-4xl font-bold text-orange-600 dark:text-orange-400">{result.disagreementScore}%</p>
+          <p className="text-3xl sm:text-4xl font-bold text-orange-600 dark:text-orange-400">{result.disagreementScore.toFixed(1)}%</p>
           <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">sources disagree</p>
         </div>
 
         <div className="bg-gray-50 dark:bg-gray-900/20 rounded-xl p-4 sm:p-6 transform hover:scale-105 transition-all duration-300 animate-fade-in" style={{ animationDelay: '0.3s' }}>
           <p className="text-xs sm:text-sm font-medium text-gray-600 dark:text-gray-400 mb-2">Neutral</p>
-          <p className="text-3xl sm:text-4xl font-bold text-gray-600 dark:text-gray-400">{neutralScore}%</p>
+          <p className="text-3xl sm:text-4xl font-bold text-gray-600 dark:text-gray-400">{neutralScore.toFixed(1)}%</p>
           <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">sources neutral</p>
         </div>
       </div>

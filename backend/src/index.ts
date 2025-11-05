@@ -67,7 +67,7 @@ console.log(`Deleted ${deleted} old cache entries`)
 app.listen(PORT, () => {
   console.log(`\nTruthMeter API server running on http://localhost:${PORT}`)
   console.log(`Database: ${DATABASE_PATH}`)
-  console.log('\nReady to fact-check tweets!\n')
+  console.log('\nReady to fact-check content!\n')
 })
 
 // Graceful shutdown
