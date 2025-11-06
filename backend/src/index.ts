@@ -3,7 +3,7 @@ import cors from 'cors'
 import dotenv from 'dotenv'
 import { initializeDatabase } from './db/schema'
 import { CacheService } from './db/cache'
-import { TavilyService } from './services/tavily'
+import { SerperService } from './services/serper'
 import { OpenAIService } from './services/openai'
 import { FactCheckerService } from './services/factChecker'
 import { createAnalyzeRouter } from './routes/analyze'
@@ -21,8 +21,8 @@ if (!process.env.OPENAI_API_KEY) {
   process.exit(1)
 }
 
-if (!process.env.TAVILY_API_KEY) {
-  console.error('Error: TAVILY_API_KEY is required')
+if (!process.env.SERPER_API_KEY) {
+  console.error('Error: SERPER_API_KEY is required')
   process.exit(1)
 }
 
@@ -32,9 +32,9 @@ const db = initializeDatabase(DATABASE_PATH)
 const cacheService = new CacheService(db)
 
 console.log('Initializing services...')
-const tavilyService = new TavilyService(process.env.TAVILY_API_KEY)
+const serperService = new SerperService(process.env.SERPER_API_KEY)
 const openaiService = new OpenAIService(process.env.OPENAI_API_KEY)
-const factChecker = new FactCheckerService(tavilyService, openaiService, cacheService)
+const factChecker = new FactCheckerService(serperService, openaiService, cacheService)
 
 // Create Express app
 const app = express()

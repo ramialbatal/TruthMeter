@@ -8,6 +8,7 @@
     "build": "tsc",
     "start": "node dist/index.js",
     "type-check": "tsc --noEmit",
+    "test:serper": "tsx src/test-serper.ts",
     "test:asknews": "tsx src/test-asknews.ts"
   },
   "keywords": [
