@@ -147,9 +147,11 @@ export class SerperService {
 
   /**
    * Search with enhanced query to get fact-checking relevant results
+   * Uses parallel requests with query variations to get 30+ unique sources
    */
   async searchForFactCheck(query: string): Promise<SerperSearchResult[]> {
-    // Single fast request for 100 high-quality results
-    return await this.search(query, 100)
+    // Use searchMultiple to get diverse results from parallel requests
+    // This gets us 30+ unique sources by making 3-4 parallel requests with variations
+    return await this.searchMultiple(query, 30)
   }
 }
