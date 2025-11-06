@@ -1,12 +1,12 @@
 import { v4 as uuidv4 } from 'uuid'
-import { TavilyService } from './tavily'
+import { SerperService } from './serper'
 import { OpenAIService } from './openai'
 import { CacheService } from '../db/cache'
 import { AnalysisResult } from '../types'
 
 export class FactCheckerService {
   constructor(
-    private tavilyService: TavilyService,
+    private serperService: SerperService,
     private openaiService: OpenAIService,
     private cacheService: CacheService
   ) {}
@@ -51,9 +51,9 @@ export class FactCheckerService {
 
     console.log('Cache miss, performing new analysis...')
 
-    // Search for sources - try to get at least 50, but process whatever we can retrieve
-    console.log('Searching sources with Tavily...')
-    const sources = await this.tavilyService.searchMultiple(contentText, 50)
+    // Search for sources - Serper can get 100 sources in a single fast request!
+    console.log('Searching sources with Serper...')
+    const sources = await this.serperService.searchForFactCheck(contentText)
 
     if (sources.length === 0) {
       throw new Error('No sources found for this content. Please try a different query.')
