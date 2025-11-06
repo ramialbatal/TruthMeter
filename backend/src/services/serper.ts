@@ -34,19 +34,11 @@ export class SerperService {
   }
 
   /**
-   * Search for sources using Serper API
-   * Can retrieve up to 100 results in a single request
+   * Search for sources using Serper API (single page)
+   * Serper returns 10 results per page by default
    */
-  async search(query: string, maxResults: number = 100): Promise<SerperSearchResult[]> {
+  private async searchPage(query: string, page: number = 1): Promise<SerperSearchResult[]> {
     try {
-      const startTime = Date.now()
-
-      // Serper supports up to 100 results per request
-      // Note: 100 results costs 2 credits instead of 1
-      const num = Math.min(maxResults, 100)
-
-      console.log(`Serper: Searching for "${query}" with ${num} results...`)
-
       const response = await fetch(this.apiUrl, {
         method: 'POST',
         headers: {
@@ -55,7 +47,8 @@ export class SerperService {
         },
         body: JSON.stringify({
           q: query,
-          num: num,
+          page: page,
+          num: 10, // Serper returns 10 results per page
         }),
       })
 
@@ -65,10 +58,8 @@ export class SerperService {
       }
 
       const data = await response.json() as SerperApiResponse
-      const duration = Date.now() - startTime
 
       if (!data.organic || data.organic.length === 0) {
-        console.warn('Serper returned no organic results')
         return []
       }
 
@@ -76,14 +67,59 @@ export class SerperService {
         url: result.link,
         title: result.title,
         content: result.snippet || '',
-        // Score decreases from 1.0 to 0.0 based on position
-        score: 1 - (index / data.organic.length),
+        // Score decreases based on page and position
+        score: 1 - ((page - 1) * 10 + index) / 100,
         published_date: result.date,
       }))
 
-      console.log(`Serper: Retrieved ${results.length} results in ${duration}ms`)
-
       return results
+    } catch (error) {
+      console.error(`Serper search error (page ${page}):`, error)
+      return [] // Return empty array instead of throwing, so other pages can still succeed
+    }
+  }
+
+  /**
+   * Search for sources using Serper API with pagination
+   * Makes parallel requests to get up to 100 results (10 pages × 10 results)
+   */
+  async search(query: string, maxResults: number = 100): Promise<SerperSearchResult[]> {
+    try {
+      const startTime = Date.now()
+
+      // Calculate how many pages we need (10 results per page)
+      const resultsPerPage = 10
+      const numPages = Math.min(Math.ceil(maxResults / resultsPerPage), 10) // Max 10 pages = 100 results
+
+      console.log(`Serper: Searching for "${query}" with ${maxResults} results (${numPages} pages in parallel)...`)
+
+      // Make parallel requests for all pages
+      const pagePromises = []
+      for (let page = 1; page <= numPages; page++) {
+        pagePromises.push(this.searchPage(query, page))
+      }
+
+      const pageResults = await Promise.all(pagePromises)
+
+      // Flatten and combine all results
+      const allResults = pageResults.flat()
+
+      // Deduplicate by URL (in case of duplicates across pages)
+      const seenUrls = new Set<string>()
+      const uniqueResults: SerperSearchResult[] = []
+
+      for (const result of allResults) {
+        if (!seenUrls.has(result.url)) {
+          seenUrls.add(result.url)
+          uniqueResults.push(result)
+        }
+      }
+
+      const duration = Date.now() - startTime
+
+      console.log(`Serper: Retrieved ${uniqueResults.length} unique results in ${duration}ms`)
+
+      return uniqueResults.slice(0, maxResults) // Trim to exact maxResults
     } catch (error) {
       console.error('Serper search error:', error)
       throw new Error('Failed to search sources with Serper. Please try again.')
